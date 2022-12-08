@@ -1,0 +1,74 @@
+@charset "UTF-8";
+
+.dynamic {
+  display: flex;
+  justify-content: center;
+  
+}
+.item_container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.item_container {
+  background-color: deepskyblue;
+  width: 100vw;
+  height: 60rem;
+}
+
+.new_item {
+  background-color: deeppink;
+  width: 40rem;
+  height: 25rem;
+}
+
+.remark_brand {
+  background-color: blueviolet;
+  width: 40rem;
+  height: 25rem;
+}
+
+
+
+/* 추가 */
+body {
+  background: #f5f5f5;
+}
+
+
+
+/* 캐러셀 */
+.dynamic {
+  /* 전체 케러셀 */
+  width: 93vw;
+  /* height:500px; */
+  left: 50%;
+  object-fit: cover;
+}
+
+.carousel-inner {
+  width: auto;
+  height: 76vh;
+  /* 이미지 높이 변경 */
+}
+
+.carousel-item {
+  width: auto;
+  height: 100%;
+}
+
+.d-block {
+  display: block;
+  width: auto;
+  height: 100%;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+

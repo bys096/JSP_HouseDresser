@@ -1,0 +1,207 @@
+@charset "UTF-8";
+body {
+	margin: 0px 0px;
+}
+.top {
+  display: flex;
+  justify-content: flex-end;
+  gap: 5px;
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5vh;
+  margin-top: 60px;
+}
+.logo img {
+  width: 25vw;
+  position: relative;
+  left: 4vw; 
+}
+.recent {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-right: 5vw;
+
+}
+
+/* .topNav ul {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  list-style: none;
+}
+.topNav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+} */
+
+
+
+/* 상단 회원가입, 고객센터 css */
+.hover-3 {
+  --b: 0.1em;
+  /* the thickness of the line */
+  --c: #1095c1;
+  /* the color */
+
+  color: #0000;
+  padding-block: var(--b);
+  background:
+    linear-gradient(var(--c) 50%, #000 0) 0% calc(100% - var(--_p, 0%))/100% 200%,
+    linear-gradient(var(--c) 0 0) 0% var(--_p, 0%)/var(--_p, 0%) var(--b) no-repeat;
+  -webkit-background-clip: text, padding-box;
+  background-clip: text, padding-box;
+  transition: .3s var(--_s, 0s) linear, background-size .3s calc(.3s - var(--_s, 0s));
+}
+
+.hover-3:hover {
+  --_p: 100%;
+  --_s: .3s;
+}
+
+.top a {
+  font-family: system-ui, sans-serif;
+
+  cursor: pointer;
+  padding: 0 .1em;
+  text-decoration-line: none;
+}
+
+
+
+
+
+
+/* nav바 css */
+ nav {
+  font-family: 'Roboto', sans-serif;
+   color: rgb(85, 75, 85); 
+  /* background-color: rgb(255, 255, 255); */
+}
+
+
+
+:active,
+:hover,
+:focus {
+  outline: 0 !important;
+  outline-offset: 0;
+}
+
+::before,
+::after {
+  position: absolute;
+  content: "";
+}
+
+.btn-holder {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 1000px;
+  margin: 10px auto 35px;
+}
+
+.btn {
+  position: relative;
+  display: inline-block;
+  width: auto;
+  height: auto;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin: 0px 25px 15px;
+  min-width: 150px;
+}
+
+.btn span {
+  position: relative;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px 20px;
+  transition: 0.3s;
+}
+
+.btn.hover-border-10::before,
+.btn.hover-border-10::after {
+  left: 0%;
+  height: 30%;
+  width: 2px;
+  transition: height 0.2s 0.35s ease-out;
+}
+
+.btn.hover-border-10::before {
+  top: 50%;
+}
+
+.btn.hover-border-10::after {
+  bottom: 50%;
+}
+
+.btn.hover-border-10:hover::before {
+  height: 50%;
+  transition: height 0.2s ease-in;
+}
+
+.btn.hover-border-10:hover::after {
+  height: 50%;
+  transition: height 0.1s ease-in;
+}
+
+.btn.hover-border-10 span::before,
+.btn.hover-border-10 span::after {
+  width: 0%;
+  height: 0%;
+  background: transparent;
+  opacity: 0;
+  z-index: 2;
+}
+
+.btn.hover-border-10 span::after {
+  bottom: 0;
+  left: 0%;
+  border-bottom: 2px solid rgb(54, 56, 55);
+  transition: width 0.25s ease-in, opacity 0s 0.35s;
+}
+
+.btn.hover-border-10 span:hover::after {
+  width: 100%;
+  opacity: 1;
+  transition: width 0.25s 0.2s ease-out, opacity 0s 0.2s;
+}
+
+.btn.hover-border-10 span::before {
+  top: 0%;
+  left: 0%;
+  border-top: 2px solid rgb(54, 56, 55);
+  border-right: 2px solid rgb(54, 56, 55);
+  transition: height 0.15s ease-in, width 0.2s 0.15s linear, opacity 0s 0.35s;
+}
+
+.btn.hover-border-10 span:hover::before {
+  width: 98.5%;
+  height: 96%;
+  opacity: 1;
+  transition: width 0.2s 0.1s linear, height 0.15s 0.3s ease-out, opacity 0s 0.1s;
+}
+
+
+
+
+
+
+
+
+
+
