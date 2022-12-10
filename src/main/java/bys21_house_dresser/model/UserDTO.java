@@ -1,5 +1,7 @@
 package bys21_house_dresser.model;
 
+import java.sql.Date;
+
 public class UserDTO {
 
 	private String user_email;
@@ -7,8 +9,8 @@ public class UserDTO {
 	private String user_name;
 	private String user_phone;
 	private String email_check = "n";
-	private String user_regdate;
-	private char user_class;
+	private Date user_regdate;
+	private String user_class;
 	private String user_zip;
 	private String user_address1;
 	private String user_address2;
@@ -16,18 +18,6 @@ public class UserDTO {
 	
 	public UserDTO() {
 		super();
-	}
-
-	public UserDTO(String user_email, String user_pwd, String user_name, String user_phone, String email_check,
-			String user_regdate, char user_class) {
-		super();
-		this.user_email = user_email;
-		this.user_pwd = user_pwd;
-		this.user_name = user_name;
-		this.user_phone = user_phone;
-		this.email_check = email_check;
-		this.user_regdate = user_regdate;
-		this.user_class = user_class;
 	}
 
 	public String getUser_email() {
@@ -70,19 +60,19 @@ public class UserDTO {
 		this.email_check = email_check;
 	}
 
-	public String getUser_regdate() {
+	public Date getUser_regdate() {
 		return user_regdate;
 	}
 
-	public void setUser_regdate(String user_regdate) {
+	public void setUser_regdate(Date user_regdate) {
 		this.user_regdate = user_regdate;
 	}
 
-	public char getUser_class() {
+	public String getUser_class() {
 		return user_class;
 	}
 
-	public void setUser_class(char user_class) {
+	public void setUser_class(String user_class) {
 		this.user_class = user_class;
 	}
 

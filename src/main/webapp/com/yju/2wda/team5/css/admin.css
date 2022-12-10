@@ -1,0 +1,27 @@
+@charset "UTF-8";
+.admin_nav {
+  background-color: aquamarine;
+  width: 15vw;
+  height: 50rem;
+}
+main {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  align-content: stretch;
+}
+section {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 5px;
+  margin-left: 2rem;
+  background-color: blueviolet;
+  width: 100vw;
+}
+
+section .img_div {
+	display: inline-block;
+}

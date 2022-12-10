@@ -14,11 +14,14 @@ public class GetProductDetailForUpdate implements Action {
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
+		System.out.println("update: record_number");
 		HttpSession session = request.getSession();
 		int record_number = Integer.valueOf(request.getParameter("record_number"));
 		ArrayList<SearchDTO> productList = (ArrayList<SearchDTO>)session.getAttribute("productList");
 		SearchDTO item = productList.get(record_number);
 		session.setAttribute("item", item);
+		
+		
 		
 //		세션에서 받아오기때문에 dao필요없음
 		

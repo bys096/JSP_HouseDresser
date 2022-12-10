@@ -18,7 +18,7 @@ public class SearchDTO {
 	private String i_file_name;
 	private String product_desc;
 	private String product_gender;
-	
+	private int quantity;
 	
 	public SearchDTO() {
 		super();
@@ -171,6 +171,16 @@ public class SearchDTO {
 
 	public void setProduct_gender(String product_gender) {
 		this.product_gender = product_gender;
+	}
+
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 	
 	

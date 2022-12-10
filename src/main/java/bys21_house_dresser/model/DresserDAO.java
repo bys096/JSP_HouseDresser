@@ -69,8 +69,8 @@ public class DresserDAO {
         boolean success = false;
         dbConnect();
         String sql = "INSERT INTO user(user_email, user_pwd, user_name, ";
-              sql += "user_phone, email_check) ";
-              sql += "values(?, ?, ?, ?, ?)";
+              sql += "user_phone, user_class, email_check) ";
+              sql += "values(?, ?, ?, ?, ?, ?)";
         try {
       	  
            pstmt = con.prepareStatement(sql);
@@ -78,7 +78,8 @@ public class DresserDAO {
            pstmt.setString(2, user.getUser_pwd());
            pstmt.setString(3, user.getUser_name());
            pstmt.setString(4, user.getUser_phone());
-           pstmt.setString(5, user.getEmail_check());
+           pstmt.setString(5, user.getUser_class());
+           pstmt.setString(6, user.getEmail_check());
            
            pstmt.executeUpdate();
            
@@ -102,11 +103,12 @@ public class DresserDAO {
      }
     
     // 로그인
-     public int login(String userEmail, String userPWD) {
-    	 int success = 0;
+     public String login(String userEmail, String userPWD) {
+    	 String result=null;
     	 dbConnect();
     	 String dbEmail=null, dbPWD=null;
-    	 String sql = "SELECT user_email, user_pwd FROM user\n"
+    	 String user_class=null;
+    	 String sql = "SELECT user_email, user_pwd, user_class FROM user\n"
     	 		+ "WHERE user_email = ?";
     	 
     	 try {
@@ -116,26 +118,31 @@ public class DresserDAO {
     		 while(rs.next()) {
     			 dbEmail = rs.getString("user_email");
     			 dbPWD = rs.getString("user_pwd");
+    			 user_class = rs.getString("user_class");
     		 }
     		 if(userEmail.equals(dbEmail)) {
     			 if(userPWD.equals(dbPWD)) {
-    				 success = 1;
+    				 if(user_class.equals("user")) {
+    					 result = "user";
+    				 }
+    				 else if(user_class.equals("seller")) {
+    					 result = "seller";
+    				 }
+    				 else if(user_class.equals("admin")) {
+    					 result = "admin";
+    				 }
     			 }
     			 else
-    				 success = 0;
-//    				 success = "errorPWD";
+				  	 result = "errorPWD";
     		 }
     		 else
-    			 success = 0;
-//    			 success = "errorEmail";
+		 		 result = "errorEmail";
     		
 		 } catch(SQLException e) {
 			 e.printStackTrace();
 		 } finally {
 			 disConnect();
-		 }
-    	  
-    	 return success;
+		 } return result;
      }
    
      
@@ -235,8 +242,6 @@ public class DresserDAO {
     	 boolean success = false;
     	 dbConnect();
     	 ArrayList<SearchDTO> searchList = new ArrayList<SearchDTO>();
-//    	 select p.product_number, u.user_email, p.product_name, p.product_price, "
-//     	 		+ "p.product_stock, p.product_regdate, p.product_hits, brand_name, i_thumbnail_name\n
     	 String sql = "SELECT * "
     			 + "from user u "
     			 + "join product p "
@@ -244,21 +249,12 @@ public class DresserDAO {
     			 + "join img_tbl i "
     			 + "on p.product_number = i.product_number "
     			 + "WHERE (p.product_name LIKE ? OR u.brand_name LIKE ?) ";
-    			 
-    	 		
-    	 
-    	 
-//    	 		+ "AND product_gender = ?\n"
-//    	 		+ "AND product_size = ?\n"
-//    	 		+ "AND product_color = ?";
     	 
     	 if(searchContent == null)
     		 searchContent="";
     	 if(product.getGender() != null) {
     		 sql +="AND p.product_gender = ?";
     	 }
-    	 
-//    	 System.out.println("검색sql: " + sql);
     	 try {
     		 pstmt = con.prepareStatement(sql);
     		 pstmt.setString(1, "%"+searchContent+"%");
@@ -279,6 +275,7 @@ public class DresserDAO {
     			 search.setProduct_regdate(rs.getDate("product_regdate"));
     			 search.setProduct_hits(rs.getInt("product_hits"));
     			 search.setBrand_name(rs.getString("brand_name"));
+    			 search.setI_number(rs.getInt("i_number"));
     			 search.setI_thumbnail_name(rs.getString("i_thumbnail_name"));
     			 search.setI_file_name(rs.getString("i_file_name"));
     			 searchList.add(search);
@@ -325,15 +322,17 @@ public class DresserDAO {
      public boolean updateUser(UserDTO user, UserAddressDTO address) {
     	 boolean success = false;
     	 dbConnect();
-    	 String sql = "UPDATE user SET user_pwd=?, user_phone=?, email_check=?, brand_name=?\n"
+    	 String sql = "UPDATE user SET user_name=?, user_pwd=?,\n"
+    	 		+ "user_phone=?, email_check=?, brand_name=?\n"
     	 		+ "WHERE user_email=?";
     	 try {
     		 pstmt = con.prepareStatement(sql);
-    		 pstmt.setString(1, user.getUser_pwd());
-    		 pstmt.setString(2, user.getUser_phone());
-    		 pstmt.setString(3, user.getEmail_check());
-    		 pstmt.setString(4, user.getBrand_name());
-    		 pstmt.setString(5, user.getUser_email());
+    		 pstmt.setString(1, user.getUser_name());
+    		 pstmt.setString(2, user.getUser_pwd());
+    		 pstmt.setString(3, user.getUser_phone());
+    		 pstmt.setString(4, user.getEmail_check());
+    		 pstmt.setString(5, user.getBrand_name());
+    		 pstmt.setString(6, user.getUser_email());
     		 pstmt.executeUpdate();
     	 } catch(SQLException e) {
     		 e.printStackTrace();
@@ -349,7 +348,8 @@ public class DresserDAO {
     		 success=true;
     	 } catch(SQLException e) {
     		 e.printStackTrace();
-    	 } finally {
+    	 }
+    	 finally {
     		 disConnect();
     	 } return success;
      }
@@ -520,5 +520,213 @@ public class DresserDAO {
     	 return success;
     	 
      }
+     
+     
+//     주문내역 등록
+     public boolean insertOrderHistory(String user_email, SearchDTO cartItem) {
+    	 boolean success = false;
+    	 dbConnect();
+    	 String sql = "INSERT INTO order_history(product_number, user_email,\n"
+    	 		+ "delivery_status, quantity, i_number)\n"
+    	 		+ "VALUES(?, ?, ?, ?, ?)\n";
+    	 try {
+    		 pstmt = con.prepareStatement(sql);
+    		 pstmt.setInt(1, cartItem.getProduct_number());
+    		 pstmt.setString(2, user_email);
+    		 pstmt.setString(3, "0");
+    		 pstmt.setInt(4, cartItem.getQuantity());
+    		 pstmt.setInt(5, cartItem.getI_number());
+    		 
+    		 pstmt.executeUpdate();
+    		 success = true;
+    	 } catch(SQLException e) {
+    		 e.printStackTrace();
+    	 } finally {
+    		 disConnect();
+    	 } return success;
+     }
+     
+//     주문 목록 가져오기
+     public ArrayList<OrderDTO> getOrderHistory(String user_email) {
+    	 boolean success;
+    	 dbConnect();
+    	 ArrayList<OrderDTO> orderList = new ArrayList<OrderDTO>();
+    	 OrderDTO order;
+    	 String sql = "SELECT order_number, delivery_status, o.product_number,\n"
+    	 		+ "o.user_email, order_date, p.product_name, p.product_price,\n"
+    	 		+ "quantity, i_thumbnail_name, i_file_name\n"
+    	 		+ "FROM order_history o\n"
+    	 		+ "JOIN product p\n"
+    	 		+ "ON o.product_number = p.product_number\n"
+    	 		+ "JOIN img_tbl i\n"
+    	 		+ "ON i.product_number = p.product_number\n"
+    	 		+ "WHERE o.user_email = ?";
+    	 try {
+    		 pstmt = con.prepareStatement(sql);
+    		 pstmt.setString(1, user_email);
+    		 ResultSet rs = pstmt.executeQuery(); 
+    		 while(rs.next()) {
+    			 order = new OrderDTO();
+    			 order.setOrder_number(rs.getInt("order_number"));
+    			 order.setDelivery_status(rs.getString("delivery_status"));
+    			 order.setProduct_number(rs.getInt("product_number"));
+    			 order.setUser_email(rs.getString("user_email"));
+    			 order.setOrder_date(rs.getDate("order_date"));
+    			 order.setProduct_name(rs.getString("product_name"));
+    			 order.setProduct_price(rs.getInt("product_price"));
+    			 order.setQuantity(rs.getInt("quantity"));
+    			 order.setI_thumbnail_name(rs.getString("i_thumbnail_name"));
+    			 order.setI_file_name(rs.getString("i_file_name"));
+    			 orderList.add(order);
+    		 }
+    	 } catch(SQLException e) {
+    		 e.printStackTrace();
+    	 } finally {
+    		 disConnect();
+    	 } return orderList;
+     }
+     
+     
+//     관리자 유저 조회
+     public ArrayList<UserDTO> getUserList() {
+    	 dbConnect();
+    	 UserDTO user;
+    	 ArrayList<UserDTO> userList = new ArrayList<UserDTO>();
+    	 String sql = "SELECT * FROM user u\n"
+    	 		+ "JOIN user_address a\n"
+    	 		+ "ON u.user_email = a.user_email\n"
+    	 		+ "ORDER BY user_regdate";
+    	 try {
+    		 pstmt = con.prepareStatement(sql);
+    		 ResultSet rs = pstmt.executeQuery();
+    		 while(rs.next()) {
+    			 user = new UserDTO();
+    			 user.setUser_email(rs.getString("user_email"));
+    			 user.setUser_pwd(rs.getString("user_pwd"));
+    			 user.setUser_name(rs.getString("user_name"));
+    			 user.setUser_phone(rs.getString("user_phone"));
+    			 user.setEmail_check(rs.getString("email_check"));
+    			 user.setUser_regdate(rs.getDate("user_regdate"));
+    			 user.setUser_class(rs.getString("user_class"));
+    			 user.setBrand_name(rs.getString("brand_name"));
+    			 user.setUser_zip(rs.getString("user_zip"));
+    			 user.setUser_address1(rs.getString("user_address1"));
+    			 user.setUser_address2(rs.getString("user_address2"));
+    			 userList.add(user);
+    		 }
+    	 } catch(SQLException e) {
+    		 e.printStackTrace();
+    	 } finally {
+    		 disConnect();
+    	 } return userList;
+     }
+     
+     
+//     관리자 상품 조회
+     public ArrayList<SearchDTO> getDressListByAdmin() {
+    	 boolean success = false;
+    	 dbConnect();
+    	 ArrayList<SearchDTO> searchList = new ArrayList<SearchDTO>();
+//    	 select p.product_number, u.user_email, p.product_name, p.product_price, "
+//     	 		+ "p.product_stock, p.product_regdate, p.product_hits, brand_name, i_number, i_thumbnail_name\n"
+    	 String sql = "SELECT *\n"
+    	 		+ "from user u\n"
+    	 		+ "join product p\n"
+    	 		+ "on p.user_email = u.user_email\n"
+    	 		+ "join img_tbl i\n"
+    	 		+ "on p.product_number = i.product_number\n";
+    	 try {
+    		 pstmt = con.prepareStatement(sql);
+    		 ResultSet rs = pstmt.executeQuery();
+    		 while(rs.next()) {
+    			 SearchDTO search = new SearchDTO();
+    			 search.setProduct_number(rs.getInt("product_number"));
+    			 search.setUser_email(rs.getString("user_email"));
+    			 search.setProduct_name(rs.getString("product_name"));
+    			 search.setProduct_price(rs.getInt("product_price"));
+    			 search.setProduct_stock(rs.getInt("product_stock"));
+    			 search.setProduct_regdate(rs.getDate("product_regdate"));
+    			 search.setProduct_hits(rs.getInt("product_hits"));
+    			 search.setBrand_name(rs.getString("brand_name"));
+    			 search.setI_number(rs.getInt("i_number"));
+    			 search.setI_thumbnail_name(rs.getString("i_thumbnail_name"));
+//    			 search.setI_file_name(rs.getString("i_file_name"));
+    			 search.setProduct_desc(rs.getString("product_desc"));
+    			 searchList.add(search);
+    		 }
+    		 success = true;
+    	 } catch(SQLException e) {
+    		 e.printStackTrace();
+    	 } finally {
+    		 disConnect();
+    	 } return searchList;
+     }
+     
+     
+//     관리자 주문내역 열람
+     public ArrayList<OrderDTO> getOrderHistoryByAdmin() {
+    	 boolean success;
+    	 dbConnect();
+    	 ArrayList<OrderDTO> orderList = new ArrayList<OrderDTO>();
+    	 OrderDTO order;
+    	 String sql = "SELECT order_number, delivery_status, o.product_number,\n"
+    	 		+ "o.user_email, order_date, p.product_name, p.product_price,\n"
+    	 		+ "quantity, i_thumbnail_name, i_file_name, user_name, user_zip, user_address1, user_address2\n"
+    	 		+ "FROM order_history o\n"
+    	 		+ "JOIN product p\n"
+    	 		+ "ON o.product_number = p.product_number\n"
+    	 		+ "JOIN img_tbl i\n"
+    	 		+ "ON i.product_number = p.product_number\n"
+    	 		+ "JOIN user u\n"
+    	 		+ "ON u.user_email = o.user_email\n"
+    	 		+ "JOIN user_address a\n"
+    	 		+ "ON u.user_email = a.user_email\n"
+    	 		+ "ORDER BY order_date DESC";
+    	 try {
+    		 pstmt = con.prepareStatement(sql);
+    		 ResultSet rs = pstmt.executeQuery(); 
+    		 while(rs.next()) {
+    			 order = new OrderDTO();
+    			 order.setOrder_number(rs.getInt("order_number"));
+    			 order.setDelivery_status(rs.getString("delivery_status"));
+    			 order.setProduct_number(rs.getInt("product_number"));
+    			 order.setUser_email(rs.getString("user_email"));
+    			 order.setOrder_date(rs.getDate("order_date"));
+    			 order.setProduct_name(rs.getString("product_name"));
+    			 order.setProduct_price(rs.getInt("product_price"));
+    			 order.setQuantity(rs.getInt("quantity"));
+    			 order.setI_thumbnail_name(rs.getString("i_thumbnail_name"));
+    			 order.setI_file_name(rs.getString("i_file_name"));
+    			 order.setUser_name(rs.getString("user_name"));
+    			 order.setUser_zip(rs.getString("user_zip"));
+    			 order.setUser_address1(rs.getString("user_address1"));
+    			 order.setUser_address2(rs.getString("user_address2"));
+    			 orderList.add(order);
+    		 }
+    	 } catch(SQLException e) {
+    		 e.printStackTrace();
+    	 } finally {
+    		 disConnect();
+    	 } return orderList;
+     }
+     
+     
+//     관리자 주문내역 삭제
+     public boolean deleteOrderByAdmin(int order_number) {
+    	 boolean success = false;
+    	 dbConnect();
+    	 String sql = "DELETE FROM order_history WHERE order_number = ?";
+    	 try {
+    		 pstmt = con.prepareStatement(sql);
+    		 pstmt.setInt(1, order_number);
+    		 pstmt.executeUpdate();
+    		 success = true;
+    	 } catch(SQLException e) {
+    		 e.printStackTrace();
+    	 } finally {
+    		 disConnect();
+    	 } return success;
+     }
+  
 }
 

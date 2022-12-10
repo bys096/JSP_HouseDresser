@@ -12,34 +12,40 @@ public class LogInAction implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-	
-		System.out.println("LoginAction 진입");
-		
 		request.setCharacterEncoding("utf-8");
 		DresserDAO dresserDAO = new DresserDAO();
-		System.out.println("DAO 인스턴스 생성");
 		HttpSession session = request.getSession();
 		
 		String userEmail = request.getParameter("email");
 		String userPWD = request.getParameter("pwd");
-		
-		
-		int daoResult = dresserDAO.login(userEmail, userPWD);
+		String daoResult = dresserDAO.login(userEmail, userPWD);
 		boolean result = false;
 		
-		if(daoResult == 1) {
-			System.out.println("로그인 성공");
+		if(daoResult.equals("user")) {
 			session.setAttribute("loginState", "login");
 			session.setAttribute("userEmail", userEmail);
 			session.setAttribute("userPWD", userPWD);
 			session.setAttribute("class", "user");
 			result = true;
-			System.out.println("로그인 in LoginAction");
-		} 
+		}
+		else if(daoResult.equals("seller")) {
+			session.setAttribute("loginState", "login");
+			session.setAttribute("userEmail", userEmail);
+			session.setAttribute("userPWD", userPWD);
+			session.setAttribute("class", "seller");
+			result = true;
+		}
+		else if(daoResult.equals("admin")) {
+			session.setAttribute("loginState", "login");
+			session.setAttribute("userEmail", userEmail);
+			session.setAttribute("userPWD", userPWD);
+			session.setAttribute("class", "admin");
+			result = true;
+		}
 		
+//		카트 세션 생성
+		session.setAttribute("cart", null);
 		
-		
-		System.out.println("session 결");
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);
 		if(result == true) {

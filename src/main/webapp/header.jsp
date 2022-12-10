@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="/bys21_house_dresser/com/yju/2wda/team5/css/dresser_header2.css?after" >
+<link rel="stylesheet" href="/bys21_house_dresser/com/yju/2wda/team5/css/dresser_header3.css?after" >
 
 <!-- 서치 -->
 <link rel="stylesheet" href="<%=cssDir %>/search_bar.css?after">
@@ -37,25 +37,52 @@
 		session.setAttribute("loginState", "logout");
 		session.setAttribute("userid", null);
 		session.setAttribute("userpw", null);
+		session.setAttribute("cart", null);
 	}
 %>
 	<header>
     <div class="top">
+    	
+    	
+    	
 <%
 
-	if(session.getAttribute("loginState").equals("login")){
+	if(session.getAttribute("loginState").equals("login")) {
+		if(session.getAttribute("class").equals("admin")) {
 %>
-		<%=session.getAttribute("userEmail")%>님 로그인중
-		<br>
-		<form name="logout" method="post" action="./logout.be">
-		  <input type="hidden" name="actionType" value="LOGOUT">
-		  <input type="submit" value="로그아웃">
-		</form> 
-		<a href="./getUserInfo.be">회원정보수정</a>
-		<%
-		if(session.getAttribute("class").equals("user")) {
+			관리자님 로그인중
+			<a href="./getUserListByAdmin.be">관리자모드</a>
+			<form name="logout" method="post" action="./logout.be">
+		 		<input type="hidden" name="actionType" value="LOGOUT">
+		    	<input type="submit" value="로그아웃">
+			</form>
+<%
+		}
+		else if(session.getAttribute("class").equals("user")) {
 %>
-			<a href="<%= dresserViewDir%>/product_upload.jsp">상품 게시</a>
+			<%=session.getAttribute("userEmail")%>님 로그인중
+			<br>
+			<form name="logout" method="post" action="./logout.be">
+		  		<input type="hidden" name="actionType" value="LOGOUT">
+				<input type="submit" value="로그아웃">
+			</form> 
+			<a href="<%=dresserViewDir%>/CartPage.jsp">장바구니</a>
+			<a href="./orderHistory.be">주문내역</a>
+			<a href="./getUserInfo.be">회원정보수정</a>
+<%
+		}
+		if(session.getAttribute("class").equals("seller")) {
+%>
+			<%=session.getAttribute("userEmail")%>님 로그인중
+			<br>
+			<form name="logout" method="post" action="./logout.be">
+		  		<input type="hidden" name="actionType" value="LOGOUT">
+				<input type="submit" value="로그아웃">
+			</form> 
+			<a href="<%=dresserViewDir%>/CartPage.jsp">장바구니</a>
+			<a href="./orderHistory.be">주문내역</a>
+			<a href="./getUserInfo.be">회원정보수정</a>
+			<a href="<%= dresserViewDir%>/product_upload.jsp">상품관리</a>
 <%
 		}
 %>

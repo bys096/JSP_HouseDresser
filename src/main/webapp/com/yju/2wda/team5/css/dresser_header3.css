@@ -86,18 +86,23 @@ body {
 
 
 
-:active,
-:hover,
-:focus {
+.btn-holder:active,
+.btn-holder:hover,
+.btn-holder:focus {
   outline: 0 !important;
   outline-offset: 0;
 }
 
-::before,
-::after {
+.btn-holder span::before,
+.btn-holder span::after {
   position: absolute;
   content: "";
 }
+
+
+
+
+
 
 .btn-holder {
   display: flex;

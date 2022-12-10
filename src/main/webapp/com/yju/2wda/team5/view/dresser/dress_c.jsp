@@ -26,6 +26,12 @@ if( session.isNew()){
     <input type="checkbox" id="agree" name="agree" required>
     <label for="agree">약관 모두 동의</label><br>
 
+	가입목적:
+	<input type="radio" id="seller" name="class" value="seller">
+	<label for="seller">판매자</label>
+	<input type="radio" id="user" name="class" value="user">
+	<label for="user">일반회원</label><br>
+	
     <label for="name">이름:</label>
     <input type="text" id="name" name="name"><br>
 

@@ -70,11 +70,41 @@ public class DressFrontController extends HttpServlet implements Servlet{
 			action = new GetProductListActionForSeller();
 			break;
 		case "/productDelete.be":
-			action = new ProductDeleteActionForSeller();
+			action = new DeleteProductBySeller();
+			break;
+		case "/getProductDetail.be":
+			action = new GetProductDetailForUpdate();
+			break;
 		case "/productUpdate.be":
 			action = new ProductUpdateActionForSeller();
 			break;
-		
+		case "/addCart.be":
+			action = new AddCartAction();
+			break;
+		case "/pay.be":
+			action = new PaymentAction();
+			break;
+		case "/orderHistory.be":
+			action = new GetOrderHistoryAction();
+			break;
+		case "/getUserListByAdmin.be":
+			action = new GetUserListForAdmin();
+			break;
+		case "/updateUserByAdmin.be":
+			action = new UpdateUserByAdmin();
+			break;
+		case "/deleteUserByAdmin.be":
+			action = new DeleteUserByAdmin();
+			break;
+		case "/getProductListByAdmin.be":
+			action = new GetProductListByAdmin();
+			break;
+		case "/OrderHistoryByAdmin.be":
+			action = new GetOrderHistoryActionByAdmin();
+			break;
+		case "/deleteOrderByAdmin.be":
+			action = new DeleteOrderHistoryByAdmin();
+			break;
 		}
 		
 		try {

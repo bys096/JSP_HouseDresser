@@ -1,0 +1,7 @@
+@charset "UTF-8";
+
+.addContainer {
+	background: linear-gradient(to right, #6478FB, #8773FB);
+	color: white;
+	cursor: pointer;
+}

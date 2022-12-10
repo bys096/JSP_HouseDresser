@@ -12,7 +12,7 @@
 <h2>상품 등록</h2>
 
 <main>
-	<div class="product_manage_nav">
+	<div class="manage_nav">
 	      <span>상품 관리</span>
 	      <div><a href="<%= dresserViewDir%>/product_upload.jsp">상품 등록</a></div>
 	      <div><a href="./productRead.be">상품 조회</a></div>
