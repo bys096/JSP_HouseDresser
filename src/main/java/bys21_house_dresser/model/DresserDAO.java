@@ -728,5 +728,55 @@ public class DresserDAO {
     	 } return success;
      }
   
+     
+//     ajax 유저이름 검색 테스트
+     public ArrayList<UserDTO> getAjaxList(String userName) {
+    	 dbConnect();
+    	 UserDTO user;
+    	 ArrayList<UserDTO> userList = new ArrayList<UserDTO>();
+    	 String sql = "SELECT * FROM user WHERE user_email LIKE ?";
+    	 try {
+    		 pstmt = con.prepareStatement(sql);
+    		 pstmt.setString(1, "%" + userName + "%");
+    		 ResultSet rs = pstmt.executeQuery();
+    		 while(rs.next()) {
+    			 user = new UserDTO();
+    			 user.setUser_name(rs.getString("user_name"));
+    			 user.setUser_email(rs.getString("user_email"));
+    			 user.setEmail_check(rs.getString("email_check"));
+    			 user.setUser_phone(rs.getString("user_phone"));
+    			 userList.add(user);
+    		 }
+    	 } catch(SQLException e) {
+    		 e.printStackTrace();
+    	 } finally {
+    		 disConnect();
+    	 } return userList;
+     }
+     
+     
+//     유저 이메일 리스트 가져오기(중복체크)
+     public UserDTO getEmailList(String userEmail) {
+    	 dbConnect();
+//    	 ArrayList<UserDTO> userList = new ArrayList<UserDTO>();
+    	 UserDTO user = new UserDTO();
+    	 
+    	 String sql = "SELECT user_email FROM user WHERE user_email = ?";
+    	 try {
+    		 pstmt = con.prepareStatement(sql);
+    		 pstmt.setString(1, userEmail);
+    		 ResultSet rs = pstmt.executeQuery();
+    		 
+    		 while(rs.next()) {
+    			 user.setUser_email(rs.getString("user_email"));
+    		 }
+    		 
+    	 } catch(SQLException e) {
+    		 e.printStackTrace();
+    	 } finally {
+    		 disConnect();
+    	 } return user;
+    	 
+     }
 }
 

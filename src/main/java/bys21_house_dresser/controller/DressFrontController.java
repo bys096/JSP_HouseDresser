@@ -18,6 +18,9 @@ public class DressFrontController extends HttpServlet implements Servlet{
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
+//		request.setCharacterEncoding("utf-8");
+//		response.setContentType("text/html;charset=UTF-8");
+		
 		String RequestURI = request.getRequestURI();
 		String contextPath = request.getContextPath();
 		String command = RequestURI.substring(contextPath.length());
@@ -105,6 +108,12 @@ public class DressFrontController extends HttpServlet implements Servlet{
 		case "/deleteOrderByAdmin.be":
 			action = new DeleteOrderHistoryByAdmin();
 			break;
+		case "/ajaxsearch.be":
+			action = new AjaxSearch();
+			break;
+		case "/redundancyCheck.be":
+			action = new EmailRedundancyCheckAction();
+			break;
 		}
 		
 		try {
@@ -122,6 +131,9 @@ public class DressFrontController extends HttpServlet implements Servlet{
 				RequestDispatcher dispatcher = request.getRequestDispatcher(forward.getPath());
 				dispatcher.forward(request, response);
 			}
+		}
+		else if(forward == null) {
+			return;
 		}
 	}
 	

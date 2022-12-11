@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="/bys21_house_dresser/com/yju/2wda/team5/css/dresser_header3.css?after" >
+<link rel="stylesheet" href="/bys21_house_dresser/com/yju/2wda/team5/css/dresser_header4.css?after" >
 
 <!-- 서치 -->
 <link rel="stylesheet" href="<%=cssDir %>/search_bar.css?after">

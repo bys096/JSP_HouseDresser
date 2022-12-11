@@ -112,7 +112,7 @@ body {
   margin: 10px auto 35px;
 }
 
-.btn {
+.btn-holder .btn {
   position: relative;
   display: inline-block;
   width: auto;
@@ -200,12 +200,6 @@ body {
   opacity: 1;
   transition: width 0.2s 0.1s linear, height 0.15s 0.3s ease-out, opacity 0s 0.1s;
 }
-
-
-
-
-
-
 
 
 

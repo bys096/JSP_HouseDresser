@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-<link rel="stylesheet" href="/bys21_house_dresser/com/yju/2wda/team5/css/dresser_index.css?after">
+<link rel="stylesheet" href="/bys21_house_dresser/com/yju/2wda/team5/css/index2.css?after">
 
 <title>Insert title here</title>
 </head>
