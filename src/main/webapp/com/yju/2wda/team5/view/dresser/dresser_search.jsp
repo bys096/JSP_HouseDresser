@@ -8,46 +8,142 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="<%=cssDir%>/search_page5.css?after">
+<link rel="stylesheet" href="<%=cssDir%>/search_page8.css?after">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:700|Raleway:500.700">
+
+
+
+ <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"> -->
+<style>
+.tabBox {
+  box-shadow: 0px 0px 22px -20px;
+  width: 320px;
+/*   width: 100%; */
+  margin: 40px 0 0 40px;
+  border: 1px solid #f9f9f9;
+}
+
+.hideSeekTab {
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+  width: 320px;
+/*   width: 100%; */
+  background-color: white;
+  text-align: center;
+}
+
+.labelBox {
+  position: relative;
+  display: flex;
+  padding: 0 8px 0 16px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.iconBox {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  transform: rotate(-45deg);
+  transition: transform .4s;
+}
+
+.line {
+  margin: auto;
+  display: block;
+  width: 22px;
+  height: 1px;
+  background: grey;
+  position: absolute;
+  top: 20px;
+}
+
+.left {
+  left: 9px;
+  transform: rotate(45deg);
+}
+
+.right {
+  right: 9px;
+  transform: rotate(-45deg);
+}
+
+.iconBox.closed {
+  transform: rotate(0deg);
+}
+
+h3.title {
+  text-align: left;
+  color: grey;
+  font-weight: 200;
+}
+
+p.text {
+  font-weight: 200;
+  color: #1d1d1b;
+  display: none;
+  padding: 0 16px;
+  text-align: left;
+  line-height: 1.5;
+  opacity: 0;
+  transition: opacity .7s;
+}
+
+p.text.open {
+  opacity: 1;
+  display: block;
+}
+</style>
+
+
+
 </head>
 <body>
 <%@ include file="/header.jsp" %>
 <%
-
 	ArrayList<SearchDTO> searchList = (ArrayList<SearchDTO>)session.getAttribute("searchList");
 %>
   <main>
-    <div class="condition_nav">
-      <div class="category">
-        <span>카테고리</span>
-        <div><a href="./search.be?gender=Woman">여성의류</a></div>
-        <div><a href="./search.be?gender=Man">남성의류</a></div>
-        <div><a href="./search.be?gender=Pub">공용</a></div>
+    <section class="tabBox">
+  <div class="hideSeekTab">
+    <div class="labelBox">
+      <h3 class="title">사이즈</h3>
+      <div class="iconBox">
+        <span class="line left"></span>
+        <span class="line right"></span>
       </div>
-      <div class="size">
-        <span>사이즈</span>
-        <div class="top_clo">
-          <span>상의</span>
-          <div class="size_item">
-            <input type="checkbox" name="size_100">
-            <label for="size_100">100</label>
-          </div>
-    
-          <div class="size_item">
-            <input type="checkbox" name="size_105">
-            <label for="size_105">105</label>
-          </div>
-    
-          <div class="size_item">
-            <input type="checkbox" name="size_110">
-            <label for="size_110">110</label>
-          </div>
-        </div>
-      </div>
-      <div>색상</div>
     </div>
+    
+    <p class="text"><input type="checkbox">체크박스</p>
+  </div>
+
+  <div class="hideSeekTab">
+    <div class="labelBox">
+      <h3 class="title">성별</h3>
+      <div class="iconBox">
+        <span class="line left"></span>
+        <span class="line right"></span>
+      </div>
+    </div>
+    <p class="text">
+    	<a href="./search.be?gender=Woman">여성의류</a>
+    </p>
+    <p class="text"><a href="./search.be?gender=Man">남성의류</a></p>
+    <p class="text"><a href="./search.be?gender=Pub">공용</a></p>
+  </div>
+
+  <div class="hideSeekTab">
+    <div class="labelBox">
+      <h3 class="title">컬러</h3>
+      <div class="iconBox">
+        <span class="line left"></span>
+        <span class="line right"></span>
+      </div>
+    </div>
+    <p class="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aperiam nesciunt natus fugiat alias similique voluptate dignissimos commodi necessitatibus adipisci neque consequatur. Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aperiam nesciunt natus fugiat alias similique voluptate dignissimos commodi necessitatibus adipisci neque consequatur. Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aperiam nesciunt natus fugiat alias similique voluptate dignissimos commodi necessitatibus adipisci neque consequatur.</p>
+  </div>
+</section>
 
 
 
@@ -73,5 +169,28 @@
 <script src="<%=jsDir %>/search_item.js"></script>
 
 </main>
+
+
+
+<script
+			  src="https://code.jquery.com/jquery-3.3.1.min.js"
+			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+			  crossorigin="anonymous"></script>
+<script>
+$(function() {
+	  // when a tab is clicked  
+	  $('.labelBox').on('click', function() {
+	    // if the one you clicked is open,      
+	    if ($(this).parent('.hideSeekTab').find('p').hasClass('open')) {
+	      $($(this).parent('.hideSeekTab')).find('p').slideToggle().removeClass('open');
+	      $($(this).parent('.hideSeekTab')).find('.iconBox').removeClass('closed');
+	    } else {
+	      // and open the one you clicked
+	      $($(this).parent('.hideSeekTab')).find('p').slideToggle().addClass('open');
+	      $($(this).parent('.hideSeekTab')).find('.iconBox').addClass('closed');
+	    }
+	  });
+	});
+</script>
 </body>
 </html>

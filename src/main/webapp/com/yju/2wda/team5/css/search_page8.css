@@ -1,27 +1,22 @@
 /* @charset "UTF-8";
 body {
-
   font-family: "Raleway";
   font-size: 14px;
   font-weight: 500;
   -webkit-font-smoothing: antialiased;
 }
-
 p {
   line-height: 1.5em;
 }
-
 h1 + p, p + p {
   margin-top: 10px;
 }
-
 .container {
   padding: 40px 80px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
-
 .card-wrap {
   margin: 10px;
   transform: perspective(800px);
@@ -50,7 +45,6 @@ h1 + p, p + p {
   transition: 0.6s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 2s cubic-bezier(0.23, 1, 0.32, 1);
   box-shadow: rgba(255, 255, 255, 0.2) 0 0 40px 5px, white 0 0 0 1px, rgba(0, 0, 0, 0.66) 0 30px 60px 0, inset #333 0 0 0 5px, inset white 0 0 0 6px;
 }
-
 .card {
   position: relative;
   flex: 0 0 240px;
@@ -66,7 +60,6 @@ h1 + p, p + p {
   box-shadow: rgba(0, 0, 0, 0.66) 0 30px 60px 0, inset #333 0 0 0 5px, inset rgba(255, 255, 255, 0.5) 0 0 0 6px;
   transition: 1s cubic-bezier(0.445, 0.05, 0.55, 0.95);
 }
-
 .card-bg {
   opacity: 0.5;
   position: absolute;
@@ -81,7 +74,6 @@ h1 + p, p + p {
   transition: 1s cubic-bezier(0.445, 0.05, 0.55, 0.95), opacity 5s 1s cubic-bezier(0.445, 0.05, 0.55, 0.95);
   pointer-events: none;
 }
-
 .card-info {
   padding: 20px;
   position: absolute;
@@ -113,36 +105,26 @@ h1 + p, p + p {
   transform: translateY(100%);
   transition: 5s 1s cubic-bezier(0.445, 0.05, 0.55, 0.95);
 }
-
 .card-info h1 {
   font-family: "Playfair Display";
   font-size: 36px;
   font-weight: 700;
   text-shadow: rgba(0, 0, 0, 0.5) 0 10px 10px;
 }
-
-
 커스텀
-
 .prd {
   display: flex;
   flex-direction: column;
   align-items: center;
   
 } 
-
 .container {
   혹은 센터
   justify-content: center;
-
 }
 .prd {
   text-align: center;
 }
-
-
-
-
 전 css
 main {
   display: flex;
@@ -150,13 +132,11 @@ main {
   align-items: stretch;
   align-content: stretch;
 }
-
 .condition_nav {
   background-color: aquamarine;
   width: 15vw;
   height: 50rem;
 }
-
 section {
   display: flex;
   flex-direction: row;
@@ -324,7 +304,6 @@ main {
 }
 
 .condition_nav {
-  background-color: aquamarine;
   width: 15vw;
   height: 50rem;
 }
@@ -337,7 +316,5 @@ section {
   align-items: stretch;
   gap: 5px;
   margin-left: 2rem;
-  background-color: blueviolet;
   width: 100vw;
 }
- 
