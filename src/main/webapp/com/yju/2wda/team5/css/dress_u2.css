@@ -332,15 +332,27 @@
 
 
 
-.email {
-  display: flex;
-  box-sizing: border-box;
+
+
+
+
+
+
+
+
+
+/* 왼쪽 nav와 오른쪽 article 구분 */
+
+
+/* 각 item들의 레이아웃 정의 */
+.article {
+  /* margin-left: 13vw; */
+  margin-top: 10vh;
+  position: relative;
+  right: 2vw;
 }
-  .email input[type=email] {
-  margin-right: 0px;
-  width: 23.5em;
+.nav-tabs {
+	margin-left: 2vw;
 }
-.email button {
-  width: 5.5em;
-  margin-left: -2em;
-}
+
+

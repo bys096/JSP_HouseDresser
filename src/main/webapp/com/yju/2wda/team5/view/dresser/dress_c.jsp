@@ -16,21 +16,6 @@
 <link rel="stylesheet" href="<%=cssDir %>/dress_c.css?after">
 
 
-<style>
-  .email {
-    display: flex;
-    box-sizing: border-box;
-  }
-  .email input[type=email] {
-    margin-right: 0px;
-    width: 23.5em;
-  }
-  .email button {
-    width: 5.5em;
-    margin-left: -2em;
-  }
-</style>
-
 </head>
 <body>
 <%

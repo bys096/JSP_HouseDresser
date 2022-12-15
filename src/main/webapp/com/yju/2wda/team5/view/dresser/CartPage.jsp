@@ -7,31 +7,59 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css
+    ">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js
+    "></script>
 </head>
 <body>
 <%@ include file="/header.jsp" %>
-<h1>카트 페이지입니다.</h1>
 <%
 	ArrayList<SearchDTO> cart = (ArrayList<SearchDTO>) session.getAttribute("cart");
 %>
-<%-- <h2>현재 카트 개수: <%=cart.size() %></h2> --%>
+<table class="table align-middle table-hover">
+	<thead class="table-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col"></th>
+        <th scope="col">상품명</th>
+        <th scope="col">상품가격</th>
+        <th scope="col">브랜드</th>
+        <th scope="col">수량</th>
+      </tr>
+    </thead>
+    <tbody>
+
+
 <%
 	if(cart != null) {
 		for(int i = 0; i < cart.size(); i++) {
 %>		
+		<tr>
+	        <th scope="row"><%=i+1 %></th>
+	        <td class="col-md-3"><img src="<%=thumbImgDir%>/<%=cart.get(i).getI_thumbnail_name() %>"></td>
+	        <td><%=cart.get(i).getProduct_name() %></td>
+	        <td><%=cart.get(i).getProduct_price() %></td>
+	        <td><%=cart.get(i).getBrand_name() %></td>
+	        <td><%=cart.get(i).getQuantity() %></td>
+      	</tr>
 		
+		
+		
+		<%-- 
 		<div><img src="<%=thumbImgDir%>/<%=cart.get(i).getI_thumbnail_name() %>"></div>
 		<div>상품이름: <%=cart.get(i).getProduct_name() %></div>
 		<div>상품가격: <%=cart.get(i).getProduct_price() %></div>
 		<div>브랜드: <%=cart.get(i).getBrand_name() %></div>
-		<div>수량:	   <%=cart.get(i).getQuantity() %></div>
+		<div>수량:	   <%=cart.get(i).getQuantity() %></div> --%>
 <%
 		}
 	}
 %>
-
-	<!-- <button onclick="location='./payPage.jsp'">결제</button> -->
-	<button onclick="pay();">결제</button>
+</tbody>
+</table>
+	
+	<button type="button" class="btn btn-danger" onclick="pay();">바로 결제</button>
 <script>
 	function pay() {
 		if(<%=cart == null %>)
