@@ -32,7 +32,6 @@ public class ProductUploadAction implements Action {
 		request.setCharacterEncoding("utf-8");
 		DresserDAO dresserDAO = new DresserDAO();
 		ProductDTO product = new ProductDTO();
-		CategoryDTO category = new CategoryDTO();
 		ImageDTO img = new ImageDTO();
 		
 		boolean result;
@@ -55,7 +54,7 @@ public class ProductUploadAction implements Action {
 		
 		while(files.hasMoreElements()) {
 			element = (String)files.nextElement();
-			filesystemName		= URLDecoder.decode(multi.getFilesystemName(element), "UTF-8");
+			filesystemName		= multi.getFilesystemName(element);
 //			filesystemName = 	new String(filesystemName.getBytes("euc-kr"),"utf-8");
 			
 			originalFileName	= multi.getOriginalFileName(element);
@@ -93,13 +92,13 @@ public class ProductUploadAction implements Action {
 				} 
 				
 				img.setI_thumbnail_name("sm_" + filesystemName);
-			}
-			else {
 				img.setI_file_name(filesystemName);
 				img.setI_original_name(originalFileName);
 				img.setI_file_type(contentType);
 				img.setI_file_size(length);
 			}
+			
+			
 				
 		}
 
@@ -111,13 +110,14 @@ public class ProductUploadAction implements Action {
 		product.setProduct_stock(Integer.parseInt(multi.getParameter("product_stock")));
 		product.setProdocut_desc(multi.getParameter("product_desc"));
 		product.setProduct_hits(0);
+		product.setGender(multi.getParameter("gender"));
 		result = dresserDAO.productUpload(product);
 		
-		category.setCategory_name(multi.getParameter("gender"));
-		result = dresserDAO.categoryUpload(category);
+//		category.setCategory_name(multi.getParameter("gender"));
+//		result = dresserDAO.categoryUpload(category);
 		
 		
-		img.setProduct_number(category.getProduct_number());
+//		img.setProduct_number(category.getProduct_number());
 		result = dresserDAO.imageUpload(img);
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);

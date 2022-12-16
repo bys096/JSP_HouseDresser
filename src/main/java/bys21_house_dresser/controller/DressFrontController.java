@@ -114,6 +114,9 @@ public class DressFrontController extends HttpServlet implements Servlet{
 		case "/redundancyCheck.be":
 			action = new EmailRedundancyCheckAction();
 			break;
+		case "/editor.be":
+			action = new Editor();
+			break;
 		}
 		
 		try {

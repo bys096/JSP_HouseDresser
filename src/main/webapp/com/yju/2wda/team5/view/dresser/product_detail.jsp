@@ -107,6 +107,9 @@
 	SearchDTO item = searchList.get(record_number);
 	session.setAttribute("viewItem", item);
 	SearchDTO nowItem = (SearchDTO) session.getAttribute("viewItem");
+	
+	
+	String desc = item.getProduct_desc();
 %>
 
 <%-- <section>
@@ -136,7 +139,8 @@
 	
 	<div class="detail-content">
     <div class="left-desc">
-      <img src="<%=thumbImgDir %>/<%=item.getI_thumbnail_name() %>">
+      <%-- <img src="<%=thumbImgDir %>/<%=item.getI_thumbnail_name() %>"> --%>
+   		<img src="<%=prdImgDir %>/<%=item.getI_file_name() %>">
     </div>
   
     <div class="right-desc">
@@ -187,6 +191,12 @@
       <div><img
           src="https://nimg.lfmall.co.kr/file/product/prd/DL/2022/1500/DLJU2D091BK_04.jpg?2022-09-29T15:55:02.000+09:00">
       </div>
+      
+      
+      <%=desc %>
+      
+      
+      
     </div>
   </div>
 <!-- </section> -->

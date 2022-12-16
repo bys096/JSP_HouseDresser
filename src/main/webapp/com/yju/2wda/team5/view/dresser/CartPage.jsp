@@ -43,15 +43,6 @@
 	        <td><%=cart.get(i).getBrand_name() %></td>
 	        <td><%=cart.get(i).getQuantity() %></td>
       	</tr>
-		
-		
-		
-		<%-- 
-		<div><img src="<%=thumbImgDir%>/<%=cart.get(i).getI_thumbnail_name() %>"></div>
-		<div>상품이름: <%=cart.get(i).getProduct_name() %></div>
-		<div>상품가격: <%=cart.get(i).getProduct_price() %></div>
-		<div>브랜드: <%=cart.get(i).getBrand_name() %></div>
-		<div>수량:	   <%=cart.get(i).getQuantity() %></div> --%>
 <%
 		}
 	}

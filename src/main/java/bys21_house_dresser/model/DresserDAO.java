@@ -151,8 +151,8 @@ public class DresserDAO {
     	 boolean success = false;
     	 dbConnect();
     	 String sql = "INSERT INTO product(user_email, product_name, product_price, ";
-    	 sql += "product_stock, product_desc, product_hits)";
-    	 sql += "VALUES(?, ?, ?, ?, ?, ?)";
+    	 sql += "product_stock, product_desc, product_hits, product_gender)";
+    	 sql += "VALUES(?, ?, ?, ?, ?, ?, ?)";
     	 
     	 try {
     		 pstmt = con.prepareStatement(sql);
@@ -162,6 +162,7 @@ public class DresserDAO {
     		 pstmt.setInt(4, product.getProduct_stock());
     		 pstmt.setString(5, product.getProdocut_desc());
     		 pstmt.setInt(6, product.getProduct_hits());
+    		 pstmt.setString(7, product.getGender());
     		 pstmt.executeUpdate();
     		 
     		 success = true;
@@ -179,21 +180,21 @@ public class DresserDAO {
      public boolean categoryUpload(CategoryDTO category) {
     	 boolean success = false;
     	 dbConnect();
-    	 String sql = "SELECT max(product_number) AS recent_id FROM product";
-    	 try {
-    		 pstmt = con.prepareStatement(sql);
-    		 ResultSet rs = pstmt.executeQuery();
-    		 while(rs.next()) {
-    			 category.setProduct_number(rs.getInt("recent_id"));
-        		 System.out.println("최신 product number: " + category.getProduct_number());
-    		 }
-    		 
-    		 
-    	 } catch(SQLException e) {
-    		 e.printStackTrace();
-    	 }
+//    	 String sql = "SELECT max(product_number) AS recent_id FROM product";
+//    	 try {
+//    		 pstmt = con.prepareStatement(sql);
+//    		 ResultSet rs = pstmt.executeQuery();
+//    		 while(rs.next()) {
+//    			 category.setProduct_number(rs.getInt("recent_id"));
+//        		 System.out.println("최신 product number: " + category.getProduct_number());
+//    		 }
+//    		 
+//    		 
+//    	 } catch(SQLException e) {
+//    		 e.printStackTrace();
+//    	 }
     	 
-    	 sql = "INSERT INTO product_category(category_name, product_number) VALUES(?, ?)";
+    	 String sql = "INSERT INTO product_category(category_name, product_number) VALUES(?, ?)";
     	 try {
     		 pstmt = con.prepareStatement(sql);
     		 pstmt.setString(1, category.getCategory_name());
@@ -215,7 +216,26 @@ public class DresserDAO {
      public boolean imageUpload(ImageDTO img) {
     	 boolean success = false;
     	 dbConnect();
-    	 String sql = "INSERT INTO img_tbl(product_number, i_thumbnail_name, i_original_name, ";
+    	 
+    	 String sql = "SELECT max(product_number) AS recent_id FROM product";
+    	 try {
+    		 pstmt = con.prepareStatement(sql);
+    		 ResultSet rs = pstmt.executeQuery();
+    		 while(rs.next()) {
+    			 img.setProduct_number(rs.getInt("recent_id"));
+    		 }
+    	 } catch(SQLException e) {
+    		 e.printStackTrace();
+    	 }
+    	 
+    	 
+    	 
+    	 
+    	 
+    	 
+    	 
+    	 
+    	 sql = "INSERT INTO img_tbl(product_number, i_thumbnail_name, i_original_name, ";
     	 sql += "i_file_name, i_file_type, i_file_size)";
     	 sql += "VALUES(?, ?, ?, ?, ?, ?)";
     	 try {
@@ -275,6 +295,7 @@ public class DresserDAO {
     			 search.setProduct_regdate(rs.getDate("product_regdate"));
     			 search.setProduct_hits(rs.getInt("product_hits"));
     			 search.setBrand_name(rs.getString("brand_name"));
+    			 search.setProduct_desc(rs.getString("product_desc"));
     			 search.setI_number(rs.getInt("i_number"));
     			 search.setI_thumbnail_name(rs.getString("i_thumbnail_name"));
     			 search.setI_file_name(rs.getString("i_file_name"));
@@ -560,7 +581,8 @@ public class DresserDAO {
     	 		+ "ON o.product_number = p.product_number\n"
     	 		+ "JOIN img_tbl i\n"
     	 		+ "ON i.product_number = p.product_number\n"
-    	 		+ "WHERE o.user_email = ?";
+    	 		+ "WHERE o.user_email = ?\n"
+    	 		+ "ORDER BY order_number";
     	 try {
     		 pstmt = con.prepareStatement(sql);
     		 pstmt.setString(1, user_email);
