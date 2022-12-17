@@ -11,6 +11,17 @@
     ">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js
     "></script>
+    <style>
+	.img-wrap {
+      width: 150px;
+      height: 150px;
+    }
+  
+    .img-wrap img {
+      width: 100%;
+      box-sizing: border-box;
+    }
+</style>
 </head>
 <body>
 <%@ include file="/header.jsp" %>
@@ -37,7 +48,11 @@
 %>		
 		<tr>
 	        <th scope="row"><%=i+1 %></th>
-	        <td class="col-md-3"><img src="<%=thumbImgDir%>/<%=cart.get(i).getI_thumbnail_name() %>"></td>
+	        <td class="col-md-3">
+	        	<div class="img-wrap">
+	        		<img src="<%=thumbImgDir%>/<%=cart.get(i).getI_thumbnail_name() %>" class="rounded mx-auto d-block">
+        		</div>
+        	</td>
 	        <td><%=cart.get(i).getProduct_name() %></td>
 	        <td><%=cart.get(i).getProduct_price() %></td>
 	        <td><%=cart.get(i).getBrand_name() %></td>

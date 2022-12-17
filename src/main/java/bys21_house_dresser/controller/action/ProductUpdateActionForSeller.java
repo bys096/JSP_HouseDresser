@@ -90,13 +90,13 @@ public class ProductUpdateActionForSeller implements Action {
 				} 
 				
 				img.setI_thumbnail_name("sm_" + filesystemName);
-			}
-			else {
 				img.setI_file_name(filesystemName);
 				img.setI_original_name(originalFileName);
 				img.setI_file_type(contentType);
 				img.setI_file_size(length);
 			}
+			
+			
 				
 		}
 		

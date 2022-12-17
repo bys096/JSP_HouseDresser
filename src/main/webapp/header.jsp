@@ -20,18 +20,12 @@
 
 <div class='search-out-container' tabindex='1'>
       <div class='search-container' tabindex='1'>
-        <input placeholder='search' type='text' id="search" name="search" onclick="keyup();">
+        <input placeholder='search' type='text' id="search" name="search" onKeyPress="if( event.keyCode==13 ){search();}">
         <a class='button'>
           <i class='fa fa-search'></i>
         </a>
       </div>
     </div>
-
-
-
-
-
-
 <%
 	if(session.isNew()) {
 		session.setAttribute("loginState", "logout");
@@ -97,7 +91,7 @@
 <%
 	}
 %>	
-	    <a href="#" class="hover-3">고객센터</a>
+	    <!-- <a href="#" class="hover-3">고객센터</a> -->
     
   </div>
   <div class="logo">
@@ -136,11 +130,15 @@
     
     -->
    <script>
-   document.addEventListener("keyup", function(event) {
+   /* document.addEventListener("keyup", function(event) {
 	    if (event.keyCode === 13) {
 	        location.href='./search.be?search=' + document.getElementById('search').value;
 	    }
-	});
+	}); */
+	
+	function search() {
+		location.href='./search.be?search=' + document.getElementById('search').value;
+	}
    </script>
    
    

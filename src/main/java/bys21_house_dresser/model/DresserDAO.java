@@ -273,8 +273,9 @@ public class DresserDAO {
     	 if(searchContent == null)
     		 searchContent="";
     	 if(product.getGender() != null) {
-    		 sql +="AND p.product_gender = ?";
+    		 sql +="AND p.product_gender = ?\n";
     	 }
+    	 sql += "ORDER BY p.product_number DESC";
     	 try {
     		 pstmt = con.prepareStatement(sql);
     		 pstmt.setString(1, "%"+searchContent+"%");
@@ -443,6 +444,7 @@ public class DresserDAO {
     			 search.setProduct_hits(rs.getInt("product_hits"));
     			 search.setBrand_name(rs.getString("brand_name"));
     			 search.setI_number(rs.getInt("i_number"));
+    			 search.setI_file_name(rs.getString("i_file_name"));
     			 search.setI_thumbnail_name(rs.getString("i_thumbnail_name"));
 //    			 search.setI_file_name(rs.getString("i_file_name"));
     			 search.setProduct_desc(rs.getString("product_desc"));

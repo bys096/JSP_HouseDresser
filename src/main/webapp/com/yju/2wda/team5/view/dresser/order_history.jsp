@@ -9,8 +9,19 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css
     ">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js
-    "></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<style>
+	.img-wrap {
+      width: 150px;
+      height: 150px;
+    }
+  
+    .img-wrap img {
+      width: 100%;
+      box-sizing: border-box;
+    }
+</style>
 </head>
 <body>
 <%@ include file="/header.jsp" %>
@@ -44,7 +55,11 @@
 %>
 		<tr>
 	        <th scope="row"><%=i+1 %></th>
-	        <td class="col-md-3"><img src="<%=thumbImgDir%>/<%=order.getI_thumbnail_name() %>" class="rounded mx-auto d-block"></td>
+	        <td class="col-md-3">
+	        	<div class="img-wrap">
+		        	<img src="<%=thumbImgDir%>/<%=order.getI_thumbnail_name() %>" class="rounded mx-auto d-block">
+	        	</div>
+        	</td>
 	        <td><%=order.getOrder_number() %></td>
 	        <td><%=order.getProduct_name() %></td>
 	        <td><%=order.getProduct_price() %>원</td>
