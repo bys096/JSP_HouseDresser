@@ -11,7 +11,7 @@ import bys21_house_dresser.model.DresserDAO;
 import bys21_house_dresser.model.ImageDTO;
 import bys21_house_dresser.model.ProductDTO;
 
-public class DeleteProductBySeller implements Action {
+public class DeleteProductByAdmin implements Action {
 
 	@Override
 	public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -29,16 +29,11 @@ public class DeleteProductBySeller implements Action {
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);
 		if(result == true) {
-			forward.setPath("./productRead.be");
+			forward.setPath("./getProductListByAdmin.be");
 		} else {
 			forward.setPath("/com/yju/2wda/team5/view/etc/error.jsp");
 		}
 		return forward;
-		
-		
-		
-		
-		
 	}
 
 }

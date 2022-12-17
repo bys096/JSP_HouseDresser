@@ -75,6 +75,9 @@ public class DressFrontController extends HttpServlet implements Servlet{
 		case "/productDelete.be":
 			action = new DeleteProductBySeller();
 			break;
+		case "/productDeleteByAdmin.be":
+			action = new DeleteProductByAdmin();
+			break;
 		case "/getProductDetail.be":
 			action = new GetProductDetailForUpdate();
 			break;

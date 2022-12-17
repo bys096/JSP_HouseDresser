@@ -35,7 +35,7 @@ public class UpdateUserByAdmin implements Action {
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);
 		if(result == true) {
-			forward.setPath("./getUserList.be");
+			forward.setPath("./getUserListByAdmin.be");
 		} else {
 			forward.setPath("/com/yju/2wda/team5/view/etc/error.jsp");
 		}

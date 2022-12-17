@@ -181,7 +181,7 @@
 
   <div class="detail-info-wrap">
     <div class="detail-info">
-      <div><img src="https://nimg.lfmall.co.kr/file/product/prd/DL/2022/1500/DLJU2D091BK_04.jpg?2022-09-29T15:55:02.000+09:00"></div>
+ <!--      <div><img src="https://nimg.lfmall.co.kr/file/product/prd/DL/2022/1500/DLJU2D091BK_04.jpg?2022-09-29T15:55:02.000+09:00"></div>
       <div><img
           src="https://nimg.lfmall.co.kr/file/product/prd/DL/2022/1500/DLJU2D091BK_04.jpg?2022-09-29T15:55:02.000+09:00">
       </div>
@@ -190,7 +190,7 @@
       </div>
       <div><img
           src="https://nimg.lfmall.co.kr/file/product/prd/DL/2022/1500/DLJU2D091BK_04.jpg?2022-09-29T15:55:02.000+09:00">
-      </div>
+      </div> -->
       
       
       <%=desc %>
