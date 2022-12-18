@@ -16,6 +16,8 @@
   "></script>
   <script src="https://kit.fontawesome.com/61d64879c5.js" crossorigin="anonymous"></script>
   <style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap');
+    .detail-content, .detail-info { font-family: 'Noto Sans KR', sans-serif; }
     .info-group {
       margin-top: 21px;
     }
@@ -42,7 +44,7 @@
       color: gray;
     }
   
-    h2 {
+    .right-desc h2 {
       font-size: 25px;
       line-height: 38px;
     }
@@ -82,21 +84,31 @@
       align-items: stretch;
     }
 
-    .detail-info {
-      width: 700px;
-      margin-left: 5%;
-      
+     .detail-info {
+      width: 650px;
     }
     .detail-info-wrap img {
       width: 100%;
-      padding: 0px 10%;
       box-sizing: border-box;
     }
     .detail-info-wrap {
       display: flex;
       flex-direction: column;
       align-items: center;
-    }
+      margin-top: 200px;
+    } 
+	.detail-content button {
+		width: 270px;
+		height: 60px;
+	}
+	.btnGroup {
+		display: flex;
+		justify-content: center;
+	 }
+	
+	#cartBtn {
+		margin-right: 1vw;
+	}
   </style>
 </head>
 <body>
@@ -111,35 +123,8 @@
 	
 	String desc = item.getProduct_desc();
 %>
-
-<%-- <section>
-	<div class="article1">
-		<div><img src="<%=thumbImgDir %>/<%=item.getI_thumbnail_name() %>"></div>
-		<div>상품명: <%=item.getProduct_name() %></div>
-		<div>상품가격: <%=item.getProduct_price() %></div>
-		<div>브랜드: <%=item.getBrand_name() %></div>
-		<div>재고수량: <%=item.getProduct_stock() %></div>
-		<!-- 1. ajax로 서버와 통신 2.db에 추가한후 세션에 담기 -->
-		<!-- <button onclick="location='./addCart.be'">장바구니 담기</button> -->
-		
-		<div>수량선택:
-			<input type="number" id="quantity" value="0">
-		</div>
-		<span class="addContainer"
-				onclick="addCart();">
-				<!-- onclick="location='./addCart.be'" -->
-			<i class="fa-solid fa-cart-plus addCart"></i> 장바구니 담기</span>
-		<button>바로 결제</button>
-		<!-- <button>찜</button> -->
-		<div>상품 설명: <%=item.getProduct_desc() %></div>
-	</div>
-	 --%>
-	
-	
-	
 	<div class="detail-content">
     <div class="left-desc">
-      <%-- <img src="<%=thumbImgDir %>/<%=item.getI_thumbnail_name() %>"> --%>
    		<img src="<%=prdImgDir %>/<%=item.getI_file_name() %>">
     </div>
   
@@ -171,29 +156,28 @@
   
   	  <div>수량선택:
 			<input type="number" id="quantity" value="0" class="form-control mb-5">
-		</div>
-      <button type="button" class="btn btn-outline-danger" onclick="addCart();">장바구니</button>
-  
-      <button type="button" class="btn btn-danger">바로 결제</button>
+	  </div>
+	  <div class="btnGroup">
+      <button type="button" id="cartBtn" class="btn btn-outline-danger" onclick="addCart();">장바구니</button>
+      <button type="button" id="payBtn" class="btn btn-danger">바로 결제</button>
+	  </div>
     </div>
   </div>
 
 
   <div class="detail-info-wrap">
     <div class="detail-info">
- <!--      <div><img src="https://nimg.lfmall.co.kr/file/product/prd/DL/2022/1500/DLJU2D091BK_04.jpg?2022-09-29T15:55:02.000+09:00"></div>
-      <div><img
-          src="https://nimg.lfmall.co.kr/file/product/prd/DL/2022/1500/DLJU2D091BK_04.jpg?2022-09-29T15:55:02.000+09:00">
-      </div>
-      <div><img
-          src="https://nimg.lfmall.co.kr/file/product/prd/DL/2022/1500/DLJU2D091BK_04.jpg?2022-09-29T15:55:02.000+09:00">
-      </div>
-      <div><img
-          src="https://nimg.lfmall.co.kr/file/product/prd/DL/2022/1500/DLJU2D091BK_04.jpg?2022-09-29T15:55:02.000+09:00">
-      </div> -->
+ 
       
       
-      <%=desc %>
+      <%
+          	if(item.getProduct_desc() != null) {
+          %>
+            <%=item.getProduct_desc() %>
+            
+          <%
+          	}    
+          %>
       
       
       

@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="<%=cssDir%>/search_page8.css?after">
+<link rel="stylesheet" href="<%=cssDir%>/search_page10.css?after">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Playfair+Display:700|Raleway:500.700">
 
@@ -18,21 +18,19 @@
 <style>
 .tabBox {
   box-shadow: 0px 0px 22px -20px;
-  width: 320px;
+  width: 250px;
 /*   width: 100%; */
-  margin: 40px 0 0 40px;
+  margin: 40px 25px 0 40px;
   border: 1px solid #f9f9f9;
 }
-
 .hideSeekTab {
   cursor: pointer;
   border-bottom: 1px solid #eee;
-  width: 320px;
+  width: 250px;
 /*   width: 100%; */
   background-color: white;
   text-align: center;
 }
-
 .labelBox {
   position: relative;
   display: flex;
@@ -40,7 +38,6 @@
   align-items: center;
   justify-content: space-between;
 }
-
 .iconBox {
   position: relative;
   width: 40px;
@@ -48,7 +45,6 @@
   transform: rotate(-45deg);
   transition: transform .4s;
 }
-
 .line {
   margin: auto;
   display: block;
@@ -58,27 +54,22 @@
   position: absolute;
   top: 20px;
 }
-
 .left {
   left: 9px;
   transform: rotate(45deg);
 }
-
 .right {
   right: 9px;
   transform: rotate(-45deg);
 }
-
 .iconBox.closed {
   transform: rotate(0deg);
 }
-
 h3.title {
   text-align: left;
   color: grey;
   font-weight: 200;
 }
-
 p.text {
   font-weight: 200;
   color: #1d1d1b;
@@ -89,11 +80,19 @@ p.text {
   opacity: 0;
   transition: opacity .7s;
 }
-
 p.text.open {
   opacity: 1;
   display: block;
 }
+
+
+
+
+
+
+
+
+
 </style>
 
 

@@ -12,6 +12,12 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <style>
+	@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap');
+    .nav-tabs, table { font-family: 'Noto Sans KR', sans-serif; }
+    table {
+      margin-top: 55px;
+    }
+	table { text-align: center;}
 	.img-wrap {
       width: 150px;
       height: 150px;
@@ -30,7 +36,17 @@
 	OrderDTO order;
 	
 %>
-
+		<ul class="nav nav-tabs">
+			<li class="nav-item">
+   				<a class="nav-link active" aria-current="page" href="./orderHistory.be" >주문내역</a>
+  			</li>
+  			<li class="nav-item">
+   				<a class="nav-link" aria-current="page" href="./getUserInfo.be" >회원정보 수정</a>
+  			</li>
+ 			<li class="nav-item">
+   				<a class="nav-link" href="<%= dresserViewDir%>/dress_d.jsp">회원 탈퇴</a>
+  			</li>
+		</ul>
 <table class="table align-middle table-hover">
 	<thead class="table-dark">
       <tr>

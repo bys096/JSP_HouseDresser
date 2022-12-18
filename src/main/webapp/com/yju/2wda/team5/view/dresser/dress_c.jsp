@@ -13,9 +13,9 @@
 ">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js
 "></script>
-<link rel="stylesheet" href="<%=cssDir %>/dress_c.css?after">
+<link rel="stylesheet" href="<%=cssDir %>/dress_c3.css?after">
 
-
+<style></style>
 </head>
 <body>
 <%
@@ -67,7 +67,7 @@ if( session.isNew()){
         <label for="name">이름</label>
       </div>
 
-      <div class="form-floating mb-3 join email">
+      <div class="form-floating mb-5 join email">
         <input type="email" id="email" name="email" class="form-control"
           placeholder="test@naver.com" required>
         <label for="email">email</label>
@@ -118,7 +118,7 @@ if( session.isNew()){
         <input type="text" id="sample6_extraAddress" placeholder="참고항목" class="form-control"><br>
         <label for="sample6_extraAddress">참고항목</label>
       </div>
-      <input type="submit" value="회원가입" class="btn btn-dark join">
+      <input type="submit" value="회원가입" id="join" class="btn btn-dark join">
 
     </form>
   </div>

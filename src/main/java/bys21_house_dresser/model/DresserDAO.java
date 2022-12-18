@@ -499,14 +499,15 @@ public class DresserDAO {
     	 dbConnect();
     	 // 프로덕트 수정
     	 String sql = "UPDATE product SET product_name=?, product_price=?, product_stock=?,\n"
-    	 		+ "product_desc=? WHERE product_number = ?";
+    	 		+ "product_desc=?, product_gender=? WHERE product_number = ?";
     	 try {
     		 pstmt = con.prepareStatement(sql);
     		 pstmt.setString(1, product.getProduct_name());
     		 pstmt.setInt(2, product.getProduct_price());
     		 pstmt.setInt(3, product.getProduct_stock());
     		 pstmt.setString(4, product.getProdocut_desc());
-    		 pstmt.setInt(5, product.getProduct_number());
+    		 pstmt.setString(5, product.getGender());
+    		 pstmt.setInt(6, product.getProduct_number());
     		 pstmt.executeUpdate();
     		 
     	 } catch(SQLException e) {

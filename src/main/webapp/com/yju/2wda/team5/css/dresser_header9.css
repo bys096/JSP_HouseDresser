@@ -1,11 +1,20 @@
 @charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap');
+
 body {
 	margin: 0px 0px;
+	
 }
 .top {
   display: flex;
   justify-content: flex-end;
   gap: 5px;
+  height: 24px;
+  align-items: center;
+  font-family: 'Noto Sans KR', sans-serif;
+  
+  padding-top: 10px;
+  margin-right: 10px; 
 }
 
 .logo {
@@ -18,7 +27,7 @@ body {
 .logo img {
   width: 25vw;
   position: relative;
-  left: 4vw; 
+  left: 1vw;  
 }
 .recent {
   display: flex;
@@ -65,8 +74,8 @@ body {
 }
 
 .top a {
-  font-family: system-ui, sans-serif;
-
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: bold;
   cursor: pointer;
   padding: 0 .1em;
   text-decoration-line: none;
@@ -78,10 +87,15 @@ body {
 
 
 /* nav바 css */
- nav {
+ .menu-nav {
   font-family: 'Roboto', sans-serif;
    color: rgb(85, 75, 85); 
   /* background-color: rgb(255, 255, 255); */
+  display: flex;
+  
+  justify-content: center;
+  position: relative;
+  left: 1vw;
 }
 
 

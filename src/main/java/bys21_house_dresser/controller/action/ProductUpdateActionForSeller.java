@@ -51,6 +51,8 @@ public class ProductUpdateActionForSeller implements Action {
 		String originalFileName = "";
 		String contentType = "";
 		long length = 0;
+		
+		if(multi.getFilesystemName("i_thumb") != null) {
 		while(files.hasMoreElements()) {
 			element = (String)files.nextElement();
 			filesystemName		= multi.getFilesystemName(element);
@@ -95,9 +97,7 @@ public class ProductUpdateActionForSeller implements Action {
 				img.setI_file_type(contentType);
 				img.setI_file_size(length);
 			}
-			
-			
-				
+		}
 		}
 		
 		
@@ -110,9 +110,9 @@ public class ProductUpdateActionForSeller implements Action {
 		product.setProduct_price(Integer.parseInt(multi.getParameter("product_price")));
 		product.setProduct_stock(Integer.parseInt(multi.getParameter("product_stock")));
 		product.setProdocut_desc(multi.getParameter("product_desc"));
-		
-		category.setCategory_name(multi.getParameter("gender"));
-		category.setProduct_number(product.getProduct_number());
+		product.setGender(multi.getParameter("gender"));
+//		category.setCategory_name(multi.getParameter("gender"));
+//		category.setProduct_number(product.getProduct_number());
 		
 		img.setProduct_number(product.getProduct_number());
 		

@@ -115,7 +115,7 @@
   flex-direction: row;
   justify-content: center;
   position: relative;
-  left: 3vw;
+  left: 1vw;
 }
 
 .form-container form {
@@ -335,6 +335,7 @@
 .email {
   display: flex;
   box-sizing: border-box;
+  
 }
   .email input[type=email] {
   margin-right: 0px;
@@ -344,3 +345,4 @@
   width: 5.5em;
   margin-left: -2em;
 }
+#join { margin-bottom: 30px; }

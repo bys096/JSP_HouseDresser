@@ -52,56 +52,62 @@ public class ProductUploadAction implements Action {
 		String contentType = "";
 		long length = 0;
 		
-		while(files.hasMoreElements()) {
-			element = (String)files.nextElement();
-			filesystemName		= multi.getFilesystemName(element);
-//			filesystemName = 	new String(filesystemName.getBytes("euc-kr"),"utf-8");
-			
-			originalFileName	= multi.getOriginalFileName(element);
-			contentType			= multi.getContentType(element);
-			length				= multi.getFile(element).length();
-			
-			
-			if(element.equals("i_thumb")) {
-				// 썸네일 이미지 작성
-				String oPath = "/Users/ban-yeongseo/eclipse_web/bys21_house_dresser/src/main/webapp/com/yju/2wda/team5/image/product_image/" + filesystemName; // 원본 경로
-				File oFile = new File(oPath);
-
-				int index = oPath.lastIndexOf(".");
-				String ext = oPath.substring(index + 1); // 파일 확장자
-
-				String tPath = oFile.getParent() + File.separator + "thumb" + File.separator + "sm_" + oFile.getName(); // 썸네일저장 경로
-				File tFile = new File(tPath);
-
-				double ratio = 4; // 이미지 축소 비율
-
-				try {
-					BufferedImage oImage = ImageIO.read(oFile); // 원본이미지
-					int tWidth = (int) (oImage.getWidth() / ratio); // 생성할 썸네일이미지의 너비
-					int tHeight = (int) (oImage.getHeight() / ratio); // 생성할 썸네일이미지의 높이
-					
-					BufferedImage tImage = new BufferedImage(tWidth, tHeight, BufferedImage.TYPE_3BYTE_BGR); // 썸네일이미지
-					Graphics2D graphic = tImage.createGraphics();
-					Image image = oImage.getScaledInstance(tWidth, tHeight, Image.SCALE_SMOOTH);
-					graphic.drawImage(image, 0, 0, tWidth, tHeight, null);
-					graphic.dispose(); // 리소스를 모두 해제
-
-					ImageIO.write(tImage, ext, tFile);
-				} catch (IOException e) {
-					e.printStackTrace();
-				} 
+		
+		
+		if(multi.getFilesystemName("i_thumb") != null) {
+			while(files.hasMoreElements()) {
+				element = (String)files.nextElement();
+				filesystemName		= multi.getFilesystemName(element);
+	//			filesystemName = 	new String(filesystemName.getBytes("euc-kr"),"utf-8");
+				originalFileName	= multi.getOriginalFileName(element);
+				contentType			= multi.getContentType(element);
+				length				= multi.getFile(element).length();
 				
-				img.setI_thumbnail_name("sm_" + filesystemName);
-				img.setI_file_name(filesystemName);
-				img.setI_original_name(originalFileName);
-				img.setI_file_type(contentType);
-				img.setI_file_size(length);
+				
+				if(element.equals("i_thumb")) {
+					// 썸네일 이미지 작성
+					String oPath = "/Users/ban-yeongseo/eclipse_web/bys21_house_dresser/src/main/webapp/com/yju/2wda/team5/image/product_image/" + filesystemName; // 원본 경로
+					File oFile = new File(oPath);
+	
+					int index = oPath.lastIndexOf(".");
+					String ext = oPath.substring(index + 1); // 파일 확장자
+	
+					String tPath = oFile.getParent() + File.separator + "thumb" + File.separator + "sm_" + oFile.getName(); // 썸네일저장 경로
+					File tFile = new File(tPath);
+	
+					double ratio = 4; // 이미지 축소 비율
+	
+					try {
+						BufferedImage oImage = ImageIO.read(oFile); // 원본이미지
+						int tWidth = (int) (oImage.getWidth() / ratio); // 생성할 썸네일이미지의 너비
+						int tHeight = (int) (oImage.getHeight() / ratio); // 생성할 썸네일이미지의 높이
+						
+						BufferedImage tImage = new BufferedImage(tWidth, tHeight, BufferedImage.TYPE_3BYTE_BGR); // 썸네일이미지
+						Graphics2D graphic = tImage.createGraphics();
+						Image image = oImage.getScaledInstance(tWidth, tHeight, Image.SCALE_SMOOTH);
+						graphic.drawImage(image, 0, 0, tWidth, tHeight, null);
+						graphic.dispose(); // 리소스를 모두 해제
+	
+						ImageIO.write(tImage, ext, tFile);
+					} catch (IOException e) {
+						e.printStackTrace();
+					} 
+					img.setI_thumbnail_name("sm_" + filesystemName);
+					img.setI_file_name(filesystemName);
+					img.setI_original_name(originalFileName);
+					img.setI_file_type(contentType);
+					img.setI_file_size(length);
+				}
 			}
-			
-			
-				
 		}
 
+//		System.out.println("이미지 썸네일이름: " + img.getI_thumbnail_name());
+//		System.out.println("이미지 파일이름: " + img.getI_file_name());
+		
+		
+		
+		
+		
 		HttpSession session = request.getSession();
 		String userEmail = session.getAttribute("userEmail").toString();			// 세션으로 부터 판매자이메일 얻기
 		product.setUser_email(userEmail);
@@ -119,6 +125,12 @@ public class ProductUploadAction implements Action {
 		
 //		img.setProduct_number(category.getProduct_number());
 		result = dresserDAO.imageUpload(img);
+		
+		
+		
+		result = true;
+		
+		
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);
 		if(result == true) {

@@ -5,16 +5,25 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+	.footer {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 10px;
+		height: 50px;
+	}
+</style>
 </head>
 <body>
 
 <hr>
 <footer>
-	<div>
-		e-mail: jamesban01@gmail.com
-		연락처:010-7673-8815
-		대표자 성명: 반영서
-		사업자 주소: 복현동
+	<div class="footer">
+		<div>e-mail: jamesban01@gmail.com</div>
+		<div>연락처:010-7673-8815</div>
+		<div>대표자 성명: 반영서</div>
+		<div>사업자 주소: 복현동</div>
 	</div>
 </footer>
 </body>

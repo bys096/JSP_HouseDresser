@@ -13,6 +13,13 @@
 "></script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap');
+    main { font-family: 'Noto Sans KR', sans-serif; }
+    
+    table { 
+    	text-align: center;
+    	margin-top: 55px;
+    }
 	.img-wrap {
       width: 150px;
       height: 150px;
@@ -22,6 +29,7 @@
       width: 100%;
       box-sizing: border-box;
     }
+    .imgCell {width: 200px;}
 </style>
 </head>
 <body>
@@ -49,7 +57,7 @@
 			<thead class="table-dark">
 		      <tr>
 		        <th scope="col">#</th>
-		        <th scope="col"></th>
+		        <th scope="col" class="imgCell"></th>
 		        <th scope="col">상품번호</th>
 		        <th scope="col">상품명</th>
 		        <th scope="col">상품가격</th>
@@ -67,7 +75,7 @@
 %>
 				<tr>
 			        <th scope="row"><%=i+1 %></th>
-			        <td class="col-md-3">
+			        <td class="col-md-3" class="imgCell">
 			        	<div class="img-wrap">
 			        		<img src="<%=thumbImgDir%>/<%=product.getI_thumbnail_name() %>" class="rounded mx-auto d-block">
 		        		</div>

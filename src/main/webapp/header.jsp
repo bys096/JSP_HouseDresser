@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="/bys21_house_dresser/com/yju/2wda/team5/css/dresser_header4.css?after" >
+<link rel="stylesheet" href="/bys21_house_dresser/com/yju/2wda/team5/css/dresser_header9.css?after" >
 
 <!-- 서치 -->
 <link rel="stylesheet" href="<%=cssDir %>/search_bar.css?after">
@@ -33,6 +33,12 @@
 		session.setAttribute("userpw", null);
 		session.setAttribute("cart", null);
 	}
+	String mail = (String) session.getAttribute("userEmail");
+	String mailSub = null;
+	if(mail != null) {
+	int idx = mail.indexOf("@");
+	mailSub = mail.substring(0, idx);
+	}
 %>
 	<header>
     <div class="top">
@@ -44,39 +50,40 @@
 	if(session.getAttribute("loginState").equals("login")) {
 		if(session.getAttribute("class").equals("admin")) {
 %>
-			관리자님 로그인중
+			<div>관리자님 로그인중</div>
 			<a href="./getUserListByAdmin.be">관리자모드</a>
-			<form name="logout" method="post" action="./logout.be">
+<!-- 			<form name="logout" method="post" action="./logout.be">
 		 		<input type="hidden" name="actionType" value="LOGOUT">
 		    	<input type="submit" value="로그아웃">
-			</form>
+			</form> -->
+			<a href="./logout.be" class="hover-3">로그아웃</a>
 <%
 		}
 		else if(session.getAttribute("class").equals("user")) {
 %>
-			<%=session.getAttribute("userEmail")%>님 로그인중
+			<a><%=mailSub %>님 로그인중</a>
 			<br>
-			<form name="logout" method="post" action="./logout.be">
+			<!-- <form name="logout" method="post" action="./logout.be">
 		  		<input type="hidden" name="actionType" value="LOGOUT">
 				<input type="submit" value="로그아웃">
-			</form> 
-			<a href="<%=dresserViewDir%>/CartPage.jsp">장바구니</a>
-			<a href="./orderHistory.be">주문내역</a>
-			<a href="./getUserInfo.be">회원정보수정</a>
+			</form>  -->
+			<a href="<%=dresserViewDir%>/CartPage.jsp" class="hover-3">장바구니</a>
+			<a href="./orderHistory.be" class="hover-3">마이페이지</a>
+			<a href="./logout.be" class="hover-3">로그아웃</a>
 <%
 		}
 		if(session.getAttribute("class").equals("seller")) {
 %>
 			<%=session.getAttribute("userEmail")%>님 로그인중
 			<br>
-			<form name="logout" method="post" action="./logout.be">
+			<!-- <form name="logout" method="post" action="./logout.be">
 		  		<input type="hidden" name="actionType" value="LOGOUT">
 				<input type="submit" value="로그아웃">
-			</form> 
-			<a href="<%=dresserViewDir%>/CartPage.jsp">장바구니</a>
-			<a href="./orderHistory.be">주문내역</a>
-			<a href="./getUserInfo.be">회원정보수정</a>
-			<a href="<%= dresserViewDir%>/product_upload.jsp">상품관리</a>
+			</form>  -->
+			<a href="<%=dresserViewDir%>/CartPage.jsp" class="hover-3">장바구니</a>
+			<a href="./orderHistory.be" class="hover-3">마이페이지</a>
+			<a href="<%= dresserViewDir%>/product_upload.jsp" class="hover-3">상품관리</a>
+			<a href="./logout.be" class="hover-3">로그아웃</a>
 <%
 		}
 %>
@@ -92,14 +99,14 @@
 	}
 %>	
 	    <!-- <a href="#" class="hover-3">고객센터</a> -->
-    
+    	
   </div>
   <div class="logo">
     <div><a href="<%=rootDir%>/index.jsp"><img src="<%=imgDir %>/logo2.png" alt="logo"></a></div>
     
   </div>
   
-  <nav>
+  <nav class="menu-nav">
 	  <div class="btn-holder">
 		<button class="btn btn-4 hover-border-10">
 	      <span>Menu1</span>
