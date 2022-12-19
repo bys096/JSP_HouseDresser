@@ -5,14 +5,24 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="/bys21_house_dresser/com/yju/2wda/team5/css/dresser_header9.css?after" >
+<link rel="stylesheet" href="/bys21_house_dresser/com/yju/2wda/team5/css/dresser_header10.css?after" >
 
 <!-- 서치 -->
-<link rel="stylesheet" href="<%=cssDir %>/search_bar.css?after">
+<link rel="stylesheet" href="<%=cssDir %>/search_bar2.css?after">
 <link href='https://fonts.googleapis.com/css?family=Scada:400,700' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Cabin:400,500,600,700' rel='stylesheet' type='text/css'>
 <!-- <link href='http://homepages.uc.edu/~arthurra/resource/font-awesome/font-awesome.css' rel='stylesheet'> -->
 <link rel='stylesheet' href='https://netdna.bootstrapcdn.com/font-awesome/2.0/css/font-awesome.css'>
+<script src="https://kit.fontawesome.com/61d64879c5.js" crossorigin="anonymous"></script>
+
+<style>
+	.top-icon {
+		margin: 2px;
+	}
+	#logout {
+		margin-left: 8px;
+	}
+</style>
 </head>
 <body>
 <%@ include file="/globalData.jsp" %>
@@ -50,40 +60,74 @@
 	if(session.getAttribute("loginState").equals("login")) {
 		if(session.getAttribute("class").equals("admin")) {
 %>
-			<div>관리자님 로그인중</div>
-			<a href="./getUserListByAdmin.be">관리자모드</a>
+			<div>관리자님</div>
+			<a href="./getUserListByAdmin.be" class="hover-3">관리자모드</a>
 <!-- 			<form name="logout" method="post" action="./logout.be">
 		 		<input type="hidden" name="actionType" value="LOGOUT">
 		    	<input type="submit" value="로그아웃">
 			</form> -->
-			<a href="./logout.be" class="hover-3">로그아웃</a>
+			<a href="./logout.be" class="hover-3">
+				<span class="top-icon" id="logout">
+					<i class="fa-solid fa-right-from-bracket"></i>
+				</span>
+			</a>
 <%
 		}
 		else if(session.getAttribute("class").equals("user")) {
 %>
-			<a><%=mailSub %>님 로그인중</a>
+			<a><%=mailSub %>님</a>
 			<br>
 			<!-- <form name="logout" method="post" action="./logout.be">
 		  		<input type="hidden" name="actionType" value="LOGOUT">
 				<input type="submit" value="로그아웃">
 			</form>  -->
-			<a href="<%=dresserViewDir%>/CartPage.jsp" class="hover-3">장바구니</a>
-			<a href="./orderHistory.be" class="hover-3">마이페이지</a>
-			<a href="./logout.be" class="hover-3">로그아웃</a>
+			
+			<a href="<%=dresserViewDir%>/CartPage.jsp" class="hover-3">
+				<span class="top-icon">
+					<i class="fa-solid fa-bag-shopping"></i>
+				</span>
+				장바구니
+			</a>
+			<a href="./orderHistory.be" class="hover-3">
+				<span class="top-icon">
+					<i class="fa-solid fa-user"></i>
+				</span>
+				마이페이지
+			</a>
+			<a href="./logout.be" class="hover-3">
+				<span class="top-icon" id="logout">
+					<i class="fa-solid fa-right-from-bracket"></i>
+				</span>
+			</a>
 <%
 		}
 		if(session.getAttribute("class").equals("seller")) {
 %>
-			<%=session.getAttribute("userEmail")%>님 로그인중
-			<br>
+			<a><%=mailSub %>님</a>
+			
 			<!-- <form name="logout" method="post" action="./logout.be">
 		  		<input type="hidden" name="actionType" value="LOGOUT">
 				<input type="submit" value="로그아웃">
 			</form>  -->
-			<a href="<%=dresserViewDir%>/CartPage.jsp" class="hover-3">장바구니</a>
-			<a href="./orderHistory.be" class="hover-3">마이페이지</a>
-			<a href="<%= dresserViewDir%>/product_upload.jsp" class="hover-3">상품관리</a>
-			<a href="./logout.be" class="hover-3">로그아웃</a>
+
+			<a href="<%= dresserViewDir%>/product_upload.jsp" class="hover-3">
+				<span class="top-icon">
+					<i class="fa-solid fa-shirt"></i>
+				</span>
+				상품관리
+			</a>
+			<a href="./orderHistory.be" class="hover-3">
+				<span class="top-icon">
+					<i class="fa-solid fa-user"></i>
+				</span>
+				마이페이지
+			</a>
+			
+			<a href="./logout.be" class="hover-3">
+				<span class="top-icon" id="logout">
+					<i class="fa-solid fa-right-from-bracket"></i>
+				</span>
+			</a>
 <%
 		}
 %>

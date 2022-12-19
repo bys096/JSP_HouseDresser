@@ -40,10 +40,10 @@
       		</button>
     	</div>
   	</div>
-	<div class="item_container">
+<!-- 	<div class="item_container">
     	<div class="new_item"></div>
     	<div class="remark_brand"></div>
-  	</div>
+  	</div> -->
   </main>
   <%@ include file="./footer.jsp" %>
 </body>

@@ -15,6 +15,11 @@
 <%-- <link rel="stylesheet" href="<%=cssDir%>/admin.css?after"> --%>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap');
+    .nav-tabs, table { font-family: 'Noto Sans KR', sans-serif; }
+    table {
+      margin-top: 55px;
+    }
 	.img-wrap {
       width: 150px;
       height: 150px;

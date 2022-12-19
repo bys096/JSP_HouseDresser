@@ -25,6 +25,7 @@ public class JoinUserAction implements Action {
 		if(request.getParameter("email_check") != null)
 			user.setEmail_check(request.getParameter("email_check"));
 		
+		user.setBrand_name(request.getParameter("brand_name"));
 		userAddress.setUser_email(user.getUser_email());
 		userAddress.setUser_zip(request.getParameter("zip"));
 		userAddress.setUser_address1(request.getParameter("address1"));

@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ page import="bys21_house_dresser.model.SearchDTO" %>
 <%@ page import="java.util.ArrayList"%>
+<%@ page import="bys21_house_dresser.model.PageInfoVO" %>
+<%@ include file="/header.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -85,7 +87,19 @@ p.text.open {
   display: block;
 }
 
-
+.paging {
+	display: flex;
+	justify-content: center;
+	gap: 2vw;
+	position: relative;
+	left: 7vw;
+	margin-top: 30px;
+	margin-bottom: 500px;
+	padding: 50px;
+}
+.top {
+	padding-top: 23px;
+}
 
 
 
@@ -99,7 +113,7 @@ p.text.open {
 
 </head>
 <body>
-<%@ include file="/header.jsp" %>
+
 <%
 	ArrayList<SearchDTO> searchList = (ArrayList<SearchDTO>)session.getAttribute("searchList");
 %>
@@ -163,14 +177,77 @@ p.text.open {
 <%	
 	}
 %>
+
+
+
+
+
+
+
+
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.min.js"></script>
-<script src="<%=jsDir %>/search_item.js"></script>
+
+
 
 </main>
 
+ 
+<div class="paging">
+<a href="./search.be?currentPageNo=0">[FIRST]</a>
+<% 
+	PageInfoVO vo;
+	vo = (PageInfoVO)session.getAttribute("vo");
+	int currentPageNo = vo.getCurrentPageNo();
+   if (currentPageNo > 0) {
+%>
+      <a href="./search.be?currentPageNo=<%=(currentPageNo-1)%>">[PRE]</a>
+<%      
+   } else {
+%>
+      <div>[PRE]</div>
+<% 
+   }
+
+   for (int i = vo.getStartPageNo(); i < vo.getEndPageNo(); i++) {
+      if (i == currentPageNo) {
+%>
+         <div>[<%=(i+1)%>]</div>
+<%
+      } else {
+%>
+         <a href="./search.be?currentPageNo=<%=i%>">[<%=(i+1)%>]</a>
+<%
+      }
+   }
+%>
+<% 
+   if (currentPageNo < vo.getPageCnt() - 1) {
+%>
+      <a href="./search.be?currentPageNo=<%=(currentPageNo+1)%>">[NXT]</a>
+<% 
+   } else {
+%>
+      [NXT]
+<%      
+   }
+%>
+<a href="./search.be?currentPageNo=<%=(vo.getPageCnt()-1)%>">[END]</a>
+
+</div> 
 
 
+
+
+
+
+
+
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.1/vue.min.js"></script>
+<script src="<%=jsDir %>/search_item.js"></script>
 <script
 			  src="https://code.jquery.com/jquery-3.3.1.min.js"
 			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="

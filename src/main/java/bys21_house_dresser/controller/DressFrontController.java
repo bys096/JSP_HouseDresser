@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bys21_house_dresser.controller.action.*;
-import bys21_house_dresser.model.DresserPageInfoVO;
+import bys21_house_dresser.model.PageInfoVO;
 
 
 public class DressFrontController extends HttpServlet implements Servlet{
@@ -27,15 +27,15 @@ public class DressFrontController extends HttpServlet implements Servlet{
 		
 		command = command.substring(command.lastIndexOf("/"));
 		
-		DresserPageInfoVO dpiVO;
+		PageInfoVO vo;
 		HttpSession session = request.getSession();
 		
-		if(session.getAttribute("dressPageInfoVO") == null) {
-			dpiVO = new DresserPageInfoVO();
-			session.setAttribute("dressPageInfoVO", dpiVO);
+		if(session.getAttribute("vo") == null) {
+			vo = new PageInfoVO();
+			session.setAttribute("vo", vo);
 		}
 		else {
-			dpiVO = (DresserPageInfoVO) session.getAttribute("dressPageInfo");
+			vo = (PageInfoVO) session.getAttribute("vo");
 		}
 		
 		ActionForward forward = null;
@@ -119,6 +119,9 @@ public class DressFrontController extends HttpServlet implements Servlet{
 			break;
 		case "/editor.be":
 			action = new Editor();
+			break;
+		case "/deleteCart.be":
+			action = new DeleteCartAction();
 			break;
 		}
 		

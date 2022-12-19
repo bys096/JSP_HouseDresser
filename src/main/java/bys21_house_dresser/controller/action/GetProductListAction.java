@@ -10,6 +10,7 @@ import bys21_house_dresser.controller.Action;
 import bys21_house_dresser.controller.ActionForward;
 import bys21_house_dresser.model.DresserDAO;
 import bys21_house_dresser.model.ImageDTO;
+import bys21_house_dresser.model.PageInfoVO;
 import bys21_house_dresser.model.ProductDTO;
 import bys21_house_dresser.model.SearchDTO;
 import bys21_house_dresser.model.UserDTO;
@@ -23,6 +24,8 @@ public class GetProductListAction implements Action {
 		ProductDTO product = new ProductDTO();
 		UserDTO user = new UserDTO();
 		ImageDTO img = new ImageDTO();
+		
+		HttpSession session = request.getSession();
 //		서치 파라미터 받기
 		String searchContent = request.getParameter("search");
 //		parts
@@ -31,12 +34,39 @@ public class GetProductListAction implements Action {
 		product.setSize(request.getParameter("size"));
 		product.setColor(request.getParameter("color"));
 		
+		
+		PageInfoVO vo;
+		
+		if (session.getAttribute("vo")==null) {
+			vo = new PageInfoVO();
+			System.out.println("vo새로 생성 " + vo.getLimitCnt());
+			session.setAttribute("vo", vo);
+		}
+		else {
+			vo = (PageInfoVO) session.getAttribute("vo");
+		}
+		int cpn;
+		String currentPageNo;
+		currentPageNo = request.getParameter("currentPageNo");
+		cpn = (currentPageNo == null)?0:Integer.parseInt(currentPageNo);
+		
+		vo.setCurrentPageNo(cpn);
+		vo.adjPageInfo();
+		
+		
+		
+		
+		
+		
+		
+		
+		
 //		추후에 앞 공백을 제거해주는 기능추가 필요
 		
 		
 		ArrayList<SearchDTO> searchList = dresserDAO.getDressList(product, user, img
-															,searchContent, gender);
-		HttpSession session = request.getSession();
+															,searchContent, gender, vo);
+		
 		session.setAttribute("searchList", searchList);
 		
 		boolean result = true;

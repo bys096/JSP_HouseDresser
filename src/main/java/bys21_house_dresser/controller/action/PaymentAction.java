@@ -25,22 +25,22 @@ public class PaymentAction implements Action {
 		String user_email = (String)session.getAttribute("userEmail");
 		ArrayList<SearchDTO> cart = (ArrayList<SearchDTO>) session.getAttribute("cart");
 		boolean result;
+		boolean success = false;
 		if(cart != null) {
-			int product_number;
 			SearchDTO cartItem;
-			boolean success;
 			for(int i = 0; i < cart.size(); i++) {
 				cartItem = cart.get(i);
-				success = dao.insertOrderHistory(user_email, cartItem);
-				if(!success) {
-					result = false;
+				System.out.println("현재카트 product_number: " + cartItem.getProduct_number());
+				success = dao.subtractStock(cartItem);
+				if(!success) 
 					break;
-				}
+				success = dao.insertOrderHistory(user_email, cartItem);
+				if(!success) 
+					break;
 			}
-			result = true;
 		}
-		else 
-			result = false;
+		
+		result = (success == true) ? true : false;
 		
 
 		
@@ -54,7 +54,7 @@ public class PaymentAction implements Action {
 			session.setAttribute("cart", null);
 			forward.setPath("./orderHistory.be");
 		} else {
-			forward.setPath("/com/yju/2wda/team5/view/etc/error.jsp");
+			forward.setPath("/com/yju/2wda/team5/view/etc/minus_stock.jsp");
 		}
 		
 		return forward;

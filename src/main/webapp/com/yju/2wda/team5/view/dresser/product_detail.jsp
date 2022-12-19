@@ -122,6 +122,7 @@
 	
 	
 	String desc = item.getProduct_desc();
+	
 %>
 	<div class="detail-content">
     <div class="left-desc">
@@ -150,7 +151,9 @@
         <ul>
           <li><span style="font-weight: bold;">1000M</span> 적립예정</li>
           <li>무료배송</li>
+          <li>재고: <%=item.getProduct_stock() %></li>
         </ul>
+          <input type="hidden" id="stock" value="<%=item.getProduct_stock()%>">
       </div>
   
   
@@ -159,7 +162,7 @@
 	  </div>
 	  <div class="btnGroup">
       <button type="button" id="cartBtn" class="btn btn-outline-danger" onclick="addCart();">장바구니</button>
-      <button type="button" id="payBtn" class="btn btn-danger">바로 결제</button>
+      <button type="button" id="payBtn" class="btn btn-danger" onclick="addCart();">바로 결제</button>
 	  </div>
     </div>
   </div>
@@ -185,13 +188,20 @@
   </div>
 <!-- </section> -->
 <script>
+	let stock = parseInt(document.getElementById('stock').value)
+	console.log('재고: ' + stock);
 	function addCart() {
-		let quantity = document.getElementById("quantity").value;
+		let quantity = parseInt(document.getElementById("quantity").value);
+		console.log('수량: ' + quantity);
 		if(quantity == 0)
-			alert('상품 수량이 0개입니다');
-		else
-			location='./addCart.be?quantity=' + quantity;
-		
+			alert('수량을 선택하지 않으셨습니다');
+		else {
+			if(stock < quantity) {
+				alert('재고가 부족합니다');
+			}
+			else
+				location='./addCart.be?quantity=' + quantity;
+		}
 	}
 </script>
 

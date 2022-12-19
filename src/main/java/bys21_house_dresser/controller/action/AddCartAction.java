@@ -33,8 +33,7 @@ public class AddCartAction implements Action {
 		if(cart == null) cart = new ArrayList<SearchDTO>();		// cart에 담겨져있는게 없다면, 새로 생성
 		cart.add(viewItem);
 		session.setAttribute("cart", cart);
-		System.out.println("추가cart: " + cart.get(cart.size()-1).getProduct_name());
-		System.out.println("cart size: " + cart.size());
+
 //		boolean result = false;
 //		
 //		if(cart == null)

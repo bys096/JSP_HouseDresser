@@ -6,6 +6,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+	footer {
+		position: relative;
+		top: 50px;
+	}
 	.footer {
 		display: flex;
 		justify-content: center;
@@ -17,8 +21,8 @@
 </head>
 <body>
 
-<hr>
 <footer>
+	<hr>
 	<div class="footer">
 		<div>e-mail: jamesban01@gmail.com</div>
 		<div>연락처:010-7673-8815</div>

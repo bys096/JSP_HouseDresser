@@ -69,8 +69,8 @@ public class DresserDAO {
         boolean success = false;
         dbConnect();
         String sql = "INSERT INTO user(user_email, user_pwd, user_name, ";
-              sql += "user_phone, user_class, email_check) ";
-              sql += "values(?, ?, ?, ?, ?, ?)";
+              sql += "user_phone, user_class, email_check, brand_name) ";
+              sql += "values(?, ?, ?, ?, ?, ?, ?)";
         try {
       	  
            pstmt = con.prepareStatement(sql);
@@ -80,6 +80,7 @@ public class DresserDAO {
            pstmt.setString(4, user.getUser_phone());
            pstmt.setString(5, user.getUser_class());
            pstmt.setString(6, user.getEmail_check());
+           pstmt.setString(7, user.getBrand_name());
            
            pstmt.executeUpdate();
            
@@ -258,10 +259,33 @@ public class DresserDAO {
      
 //     검색
      public ArrayList<SearchDTO> getDressList(ProductDTO product, UserDTO user, ImageDTO img
-    		 , String searchContent, String gender) {
+    		 , String searchContent, String gender, PageInfoVO vo) {
     	 boolean success = false;
     	 dbConnect();
     	 ArrayList<SearchDTO> searchList = new ArrayList<SearchDTO>();
+    	 String cntSql = "SELECT COUNT(*) FROM product";
+    	 
+    	 try {
+             pstmt = con.prepareStatement(cntSql);
+             ResultSet rs = pstmt.executeQuery();
+             
+             while (rs.next()) {
+                vo.setRecordCnt(rs.getInt(1));
+             }
+          } catch (Exception e) {
+             e.printStackTrace();
+          }
+    	 
+    	 
+    	 vo.adjPageInfo();
+    	 System.out.println("startRecord: " + vo.getStartRecord());
+    	 
+    	 
+    	 
+    	 
+    	 
+    	 
+    	 
     	 String sql = "SELECT * "
     			 + "from user u "
     			 + "join product p "
@@ -275,14 +299,21 @@ public class DresserDAO {
     	 if(product.getGender() != null) {
     		 sql +="AND p.product_gender = ?\n";
     	 }
-    	 sql += "ORDER BY p.product_number DESC";
+    	 sql += "ORDER BY p.product_number DESC\n";
+    	 sql += "LIMIT ?, ?";
     	 try {
     		 pstmt = con.prepareStatement(sql);
     		 pstmt.setString(1, "%"+searchContent+"%");
     		 pstmt.setString(2, "%"+searchContent+"%");
     		 if(product.getGender() != null) {
         		 pstmt.setString(3, product.getGender());
+        		 pstmt.setInt(4, vo.getStartRecord());
+        		 pstmt.setInt(5, vo.getLimitCnt());
         	 }
+    		 else {
+        		 pstmt.setInt(3, vo.getStartRecord());
+        		 pstmt.setInt(4, vo.getLimitCnt());
+    		 }
 //    		 
     		 SearchDTO search = null;
     		 ResultSet rs = pstmt.executeQuery();
@@ -802,6 +833,49 @@ public class DresserDAO {
     		 disConnect();
     	 } return user;
     	 
+     }
+     
+     
+//     제품 결제 시 , 재고량에서 빼기
+     public boolean subtractStock(SearchDTO cartItem) {
+    	 boolean success = false;
+    	 dbConnect();
+    	 String sql = "SELECT product_stock FROM product\n"
+    	 		+ "WHERE product_number = ?";
+    	 int nowStock = -1;		// 현재 재고
+    	 try {
+    		 pstmt = con.prepareStatement(sql);
+    		 pstmt.setInt(1, cartItem.getProduct_number());
+    		 ResultSet rs = pstmt.executeQuery();
+    		 while(rs.next()) {
+    			 nowStock = rs.getInt("product_stock");
+    		 }
+    	 } catch(SQLException e) {
+    		 e.printStackTrace();
+    	 }
+    	 
+    	 System.out.println("현재 재고: " + nowStock);
+    	 System.out.println("주문들어온 수량: " + cartItem.getQuantity());
+    	 
+    	 
+    	 sql = "UPDATE product SET product_stock = ?\n"
+    	 		+ "WHERE product_number = ?";
+    	 
+    	 int quantity = cartItem.getQuantity();
+    	 int restStock = nowStock - quantity;
+    	 if(restStock < 0)
+    		 return false;
+    	 try {
+    		 pstmt = con.prepareStatement(sql);
+    		 pstmt.setInt(1, restStock);
+    		 pstmt.setInt(2, cartItem.getProduct_number());
+    		 pstmt.executeUpdate();
+    		 success = true;
+    	 } catch(SQLException e) {
+    		 e.printStackTrace();
+    	 } finally {
+    		 disConnect();
+    	 } return success;
      }
 }
 

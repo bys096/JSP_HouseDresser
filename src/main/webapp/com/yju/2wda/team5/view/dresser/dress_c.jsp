@@ -13,7 +13,7 @@
 ">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js
 "></script>
-<link rel="stylesheet" href="<%=cssDir %>/dress_c3.css?after">
+<link rel="stylesheet" href="<%=cssDir %>/dress_c4.css?after">
 
 <style></style>
 </head>
@@ -33,7 +33,8 @@ if( session.isNew()){
 
 <div class="form-container ">
   <div class="rounded">
-    <form method="post" action="./joinUser.be" class="form-floating ">
+    <form method="post" action="./joinUser.be" class="form-floating"
+    		onSubmit="return Checkform()">
       <div class="join-purpose join">
         <div class="class-container">
           <div class="tabs">
@@ -45,9 +46,6 @@ if( session.isNew()){
           </div>
         </div>
       </div>
-      
-      
-
 
       <div class="content agree">
         <ul class="list">
@@ -69,7 +67,8 @@ if( session.isNew()){
 
       <div class="form-floating mb-5 join email">
         <input type="email" id="email" name="email" class="form-control"
-          placeholder="test@naver.com" required>
+         	 	placeholder="test@naver.com"
+           		onkeyup="keyupEmail();" required>
         <label for="email">email</label>
         <button type="button" onclick="redundancyCheck();" class="btn btn-dark join">중복체크</button>
         <!-- <div id="checkResult">이메일중복여부</div> -->
@@ -101,6 +100,10 @@ if( session.isNew()){
     </div>
 
 
+		<div class="form-floating mb-3 join">
+        <input type="text" id="brand_name" name="brand_name" class="form-control"><br>
+        <label for="name">브랜드명</label>
+      </div>
       <div class="form-floating mb-3 join zip">
         <input type="text" id="sample6_postcode" placeholder="우편번호" name="zip" class="form-control">
         <label for="phone">우편번호</label>
@@ -135,8 +138,8 @@ if( session.isNew()){
   <script type="text/javascript">
 	var request = new XMLHttpRequest();
 	var bool = false;
+	var isCheck = false;
 	function redundancyCheck() {
-		
 		request.open("Post", "./redundancyCheck.be?userEmail=" + encodeURIComponent(document.getElementById("email").value), true);
 		request.onreadystatechange = searchProcess;
 		request.send(null);
@@ -162,13 +165,31 @@ if( session.isNew()){
 			if(bool) {
 				bool=false;
 				email.setAttribute('class', 'form-control is-invalid');
-				/* checkResult.innerHTML = "중복"; */				
+				/* checkResult.innerHTML = "중복"; */			
+				isCheck = false;
 			}
 			else {
 				email.setAttribute('class', 'form-control is-valid');				
 				/* checkResult.innerHTML = "중복아님"; */
+				isCheck = true;
 			}	
 		}
+	}
+	
+	function Checkform() {
+		console.log(isCheck);
+		if(isCheck)
+			return true;
+		else {
+			alert('중복 체크를 실행해주세요');
+			return false;
+		}
+	}
+	
+	function keyupEmail() {
+		isCheck = false;
+		email.setAttribute('class', 'form-control is-invalid');
+		
 	}
 </script>
   

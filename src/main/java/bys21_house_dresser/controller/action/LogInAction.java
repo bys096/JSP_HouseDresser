@@ -44,7 +44,7 @@ public class LogInAction implements Action {
 		}
 		
 //		카트 세션 생성
-		session.setAttribute("cart", null);
+//		session.setAttribute("cart", null);
 		
 		ActionForward forward = new ActionForward();
 		forward.setRedirect(false);

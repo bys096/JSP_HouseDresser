@@ -14,7 +14,7 @@
 		function sayHi() {
 			var is = confirm("정말 결제하시겠습니까?");
 			if(is == true) {
-				alert("결제가 완료되었습니다.");
+				/* alert("결제가 완료되었습니다."); */
 				location='./pay.be'
 			}
 		}
